@@ -1,0 +1,44 @@
+﻿<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="~/coreblogtema/web/js/jquery-2.2.3.min.js"></script>
+
+<div class="tech-btm">
+	<img src="~/CoreBlogTema/web/images/banner1.jpg" class="img-fluid" alt="">
+</div>
+<div class="tech-btm">
+	<h4>Mail bültenine abone olun</h4>
+	<p>Yeni yazılardan haberdar olun.</p>
+	<form method="post">
+		<input type="email" id ="email" placeholder="Email" required="" name="Mail">
+		<input type="submit" id="btn" value="Abone Ol">
+    </form>
+</div>
+
+<script type="text/javascript">
+    $("#btn").on('click', function (event) {
+
+        event.preventDefault(); // Prevent the page from redirecting (prevents sweet alert closing suddenly afer appearing)
+
+        let values = {
+            Mail: $("#email").val()
+        };
+        
+        $.ajax({
+            type: "POST",
+            url: "/NewsLetter/SubscribeMail",
+            data: values,
+            success: function (response) {
+                if (response.result) {
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'Mail bültenine abone olundu!',
+                        showConfirmButton: false,
+                        timer: 2000
+                    })
+                }
+            }
+        });
+    });
+</script>
+
+
