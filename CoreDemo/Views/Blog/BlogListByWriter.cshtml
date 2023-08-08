@@ -1,0 +1,52 @@
+﻿@using EntityLayer.Concrete
+@model List<Blog>
+
+@{
+    ViewData["Title"] = "BlogListByWriter";
+    Layout = "~/Views/Shared/WriterLayout.cshtml";
+}
+
+<div class="grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">My Blogs</h4>
+            <p class="card-description">
+            </p>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Category</th>
+                        <th>Created On</th>
+                        <th>Status</th>
+                        <th>Delete</th>
+                        <th>Edit</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach(var item in Model)
+                    {
+                        <tr>
+                            <td>@item.BlogTitle</td>
+                            <td>@item.CategoryID</td>
+                            <td>@(((DateTime)item.CreateDate).ToString("dd.MM.yyyy"))</td>
+                            <td><label class="badge badge-success">@item.BlogStatus</label></td>
+                            <td>
+                                <button type="button" class="btn btn-gradient-danger btn-rounded btn-icon">
+                                    <i class="mdi mdi-delete"></i>
+                                </button>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-gradient-warning btn-rounded btn-icon">
+                                    <i class="mdi mdi-tooltip-edit"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <button type="button" class="btn btn-gradient-info">Add New Blog</button>
+        </div>
+    </div>
+</div>
+

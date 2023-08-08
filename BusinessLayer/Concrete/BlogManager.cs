@@ -19,9 +19,9 @@ namespace BusinessLayer.Concrete
 			_blogDal = blogDal;
         }
 
-        public void AddBlog()
+        public void AddBlog(Blog blog)
 		{
-			throw new NotImplementedException();
+			_blogDal.Insert(blog);
 		}
 
 		public void DeleteBlog()
@@ -63,5 +63,6 @@ namespace BusinessLayer.Concrete
 		{
 			return _blogDal.GetAll(x => x.WriterID == id);
 		}
-	}
+
+    }
 }

@@ -9,7 +9,7 @@ namespace BusinessLayer.Abstract
 {
 	public interface IBlogService
 	{
-		void AddBlog();
+		void AddBlog(Blog blog);
 
 		void DeleteBlog();
 
