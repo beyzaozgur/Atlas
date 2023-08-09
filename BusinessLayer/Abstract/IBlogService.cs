@@ -11,7 +11,7 @@ namespace BusinessLayer.Abstract
 	{
 		void AddBlog(Blog blog);
 
-		void DeleteBlog();
+		void DeleteBlog(Blog blog);
 
 		void UpdateBlog();
 

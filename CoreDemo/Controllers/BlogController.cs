@@ -53,5 +53,13 @@ namespace CoreDemo.Controllers
 			blogManager.AddBlog(blog);
 			return RedirectToAction("BlogListByWriter", "Blog");
         }
+
+        [AllowAnonymous]
+        public IActionResult BlogDelete(int id)
+        {
+			var values = blogManager.GetByID(id);
+			blogManager.DeleteBlog(values);
+			return Json(new { result = true });
+		}
     }
 }

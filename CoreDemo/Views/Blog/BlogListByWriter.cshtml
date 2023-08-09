@@ -2,68 +2,104 @@
 @model List<Blog>
 
 @{
-    ViewData["Title"] = "BlogListByWriter";
-    Layout = "~/Views/Shared/WriterLayout.cshtml";
+	ViewData["Title"] = "BlogListByWriter";
+	Layout = "~/Views/Shared/WriterLayout.cshtml";
 }
 
 <div class="grid-margin stretch-card">
-    <div class="card">
-        <div class="card-body">
-            <h4 class="card-title">My Blogs</h4>
-            <p class="card-description">
-            </p>
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th>Title</th>
-                        <th>Category</th>
-                        <th>Created On</th>
-                        <th>Status</th>
-                        <th>Delete</th>
-                        <th>Edit</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach(var item in Model)
-                    {
-                        <tr>
-                            <td>@item.BlogTitle</td>
-                            <td>@item.Category.CategoryName</td>
-                            <td>@(((DateTime)item.CreateDate).ToString("dd.MM.yyyy"))</td>
-                            <td>
-                                @if(item.BlogStatus == true)
-                                {
-                                    <label class="badge badge-success">Active</label>
-                                } else
-                                {
-                                    <label class="badge badge-danger">Passive</label>
-                                }
-                            </td>
-                            <td>
-                                <button type="button" class="btn btn-gradient-danger btn-rounded btn-icon">
-                                    <i class="mdi mdi-delete"></i>
-                                </button>
-                            </td>
-                            <td>
-                                <button type="button" class="btn btn-gradient-warning btn-rounded btn-icon">
-                                    <i class="mdi mdi-tooltip-edit"></i>
-                                </button>
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-            <button type="button" id="addBlogBtn" class="btn btn-gradient-info">Add New Blog</button>
-        </div>
-    </div>
+	<div class="card">
+		<div class="card-body">
+			<h4 class="card-title">My Blogs</h4>
+			<p class="card-description">
+			</p>
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>Title</th>
+						<th>Category</th>
+						<th>Created On</th>
+						<th>Status</th>
+						<th>Delete</th>
+						<th>Edit</th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (var item in Model)
+					{
+						<tr>
+							<td>@item.BlogTitle</td>
+							<td>@item.Category.CategoryName</td>
+							<td>@(((DateTime)item.CreateDate).ToString("dd.MM.yyyy"))</td>
+							<td>
+								@if (item.BlogStatus == true)
+								{
+									<label class="badge badge-success">Active</label>
+								}
+								else
+								{
+									<label class="badge badge-danger">Passive</label>
+								}
+							</td>
+							<td>
+								<button type="button" id="deleteBtn" onclick="deleteBlog(@item.BlogID)" class="btn btn-gradient-danger btn-rounded btn-icon">
+									<i class="mdi mdi-delete"></i>
+								</button>
+							</td>
+							<td>
+								<button type="button" class="btn btn-gradient-warning btn-rounded btn-icon">
+									<i class="mdi mdi-tooltip-edit"></i>
+								</button>
+							</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+			<button type="button" id="addBlogBtn" class="btn btn-gradient-info">Add New Blog</button>
+		</div>
+	</div>
 </div>
 
-<script>
-    const button = document.getElementById('addBlogBtn');
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="~/coreblogtema/web/js/jquery-2.2.3.min.js"></script>
 
-    button.addEventListener('click', function () {
-        const url = '@Url.Action("BlogAdd", "Blog")';
-        window.location.href = url;
-    });
+<script>
+	const button = document.getElementById('addBlogBtn');
+
+	button.addEventListener('click', function () {
+		const url = '@Url.Action("BlogAdd", "Blog")';
+		window.location.href = url;
+	});
+
+	function deleteBlog(id) {
+
+		Swal.fire({
+			title: 'Are you sure?',
+			text: "You won't be able to revert this!",
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Yes, delete this blog!'
+		}).then((result) => {
+			if (result.isConfirmed) {
+				$.ajax({
+					type: "POST",
+					url: "/Blog/BlogDelete/" + id,
+					success: function (response) {
+						if (response.result) {
+							Swal.fire(
+								'Deleted!',
+								'Blog has been deleted.',
+								'success'
+							).then(function () {
+								location.reload();
+							}
+							);
+						}
+					}
+				});
+			}
+		})
+	}
 </script>
 
