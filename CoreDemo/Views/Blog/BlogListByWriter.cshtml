@@ -28,9 +28,17 @@
                     {
                         <tr>
                             <td>@item.BlogTitle</td>
-                            <td>@item.CategoryID</td>
+                            <td>@item.Category.CategoryName</td>
                             <td>@(((DateTime)item.CreateDate).ToString("dd.MM.yyyy"))</td>
-                            <td><label class="badge badge-success">@item.BlogStatus</label></td>
+                            <td>
+                                @if(item.BlogStatus == true)
+                                {
+                                    <label class="badge badge-success">Active</label>
+                                } else
+                                {
+                                    <label class="badge badge-danger">Passive</label>
+                                }
+                            </td>
                             <td>
                                 <button type="button" class="btn btn-gradient-danger btn-rounded btn-icon">
                                     <i class="mdi mdi-delete"></i>
@@ -45,8 +53,17 @@
                     }
                 </tbody>
             </table>
-            <button type="button" class="btn btn-gradient-info">Add New Blog</button>
+            <button type="button" id="addBlogBtn" class="btn btn-gradient-info">Add New Blog</button>
         </div>
     </div>
 </div>
+
+<script>
+    const button = document.getElementById('addBlogBtn');
+
+    button.addEventListener('click', function () {
+        const url = '@Url.Action("BlogAdd", "Blog")';
+        window.location.href = url;
+    });
+</script>
 

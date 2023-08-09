@@ -3,6 +3,7 @@ using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace CoreDemo.Controllers
 {
@@ -26,7 +27,7 @@ namespace CoreDemo.Controllers
 		[AllowAnonymous]
         public IActionResult BlogListByWriter(int id)
         {
-			var values = blogManager.GetBlogListByWriter(1);
+			var values = blogManager.GetBlogListWithCategoryByWriter(1);
 			return View(values);
         }
 
@@ -34,6 +35,9 @@ namespace CoreDemo.Controllers
 		[HttpGet]
         public IActionResult BlogAdd()
         {
+			CategoryManager categoryManager = new CategoryManager(new EfCategoryRepository());
+			List<SelectListItem> categories = (from x in categoryManager.GetList() select new SelectListItem { Text = x.CategoryName, Value = x.CategoryID.ToString() }).ToList();
+			ViewBag.categories = categories;
             return View();
         }
 
@@ -41,9 +45,11 @@ namespace CoreDemo.Controllers
         [HttpPost]
         public IActionResult BlogAdd(Blog blog)
         {
-			blog.BlogStatus = true;
+			blog.BlogStatus = false;
 			blog.CreateDate = DateTime.Now;
-			blog.WriterID = 1;
+			blog.BlogImage = "~/CoreBlogTema/web/images/3.jpg";
+			blog.BlogThumbnailImage = "~/CoreBlogTema/web/images/3.jpg";
+            blog.WriterID = 1;
 			blogManager.AddBlog(blog);
 			return RedirectToAction("BlogListByWriter", "Blog");
         }

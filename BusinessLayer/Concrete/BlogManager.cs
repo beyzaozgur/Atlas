@@ -34,7 +34,12 @@ namespace BusinessLayer.Concrete
 			return _blogDal.GetListWithCategory();
 		}
 
-		public Blog GetByID(int id)
+        public List<Blog> GetBlogListWithCategoryByWriter(int id)
+        {
+            return _blogDal.GetListWithCategoryByWriter(id);
+        }
+
+        public Blog GetByID(int id)
 		{
 			throw new NotImplementedException();
 		}
