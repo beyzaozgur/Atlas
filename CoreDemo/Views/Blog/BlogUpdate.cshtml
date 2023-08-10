@@ -1,0 +1,75 @@
+﻿@model EntityLayer.Concrete.Blog
+
+@{
+	ViewData["Title"] = "BlogUpdate";
+	Layout = "~/Views/Shared/WriterLayout.cshtml";
+}
+
+<div class="col-12 grid-margin stretch-card">
+	<div class="card">
+		<div class="card-body">
+			<h4 class="card-title">Update Blog</h4>
+			<form method="post" action="/Blog/BlogUpdate/" class="forms-sample">
+				@Html.HiddenFor(x => x.BlogID)
+				@Html.HiddenFor(x => x.BlogStatus)
+				@Html.HiddenFor(x => x.CreateDate)
+				@Html.HiddenFor(x => x.BlogImage)
+				@Html.HiddenFor(x => x.BlogThumbnailImage)
+				@Html.HiddenFor(x => x.WriterID)
+
+				<div class="form-group">
+					@Html.Label("Title")
+					@Html.TextBoxFor(x => x.BlogTitle, new { @class = "form-control"})
+				</div>
+				<div class="form-group">
+					<label>Image</label>
+					<input type="file" name="img[]" class="file-upload-default">
+					<div class="input-group col-xs-12">
+						<input type="text" class="form-control file-upload-info" disabled placeholder="Upload Image" name="BlogImage">
+						<span class="input-group-append">
+							<button class="file-upload-browse btn btn-gradient-primary" type="button">Upload</button>
+						</span>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="categoryDropdown">Category</label>
+					<select style="color: black;" class="form-control" id="categoryDropdown" name="CategoryID">
+						@foreach (var item in ViewBag.categories)
+						{
+							if (item.Value == Model.CategoryID.ToString())
+							{
+								<option value="@item.Value" selected>@item.Text</option>
+							}
+							else
+							{
+								<option value="@item.Value">@item.Text</option>
+							}
+						}
+					</select>
+				</div>
+
+				<div class="form-group">
+					@Html.Label("Content")
+					@Html.TextAreaFor(x => x.BlogContent, 10, 3, new { @class = "form-control"})
+				</div>
+				<button type="submit" id="updateBtn" class="btn btn-gradient-primary mr-2">Update</button>
+			</form>
+		</div>
+	</div>
+</div>
+
+<script src="~/coreblogtema/web/js/jquery-2.2.3.min.js"></script>
+<script>
+	(function ($) {
+		'use strict';
+		$(function () {
+			$('.file-upload-browse').on('click', function () {
+				var file = $(this).parent().parent().parent().find('.file-upload-default');
+				file.trigger('click');
+			});
+			$('.file-upload-default').on('change', function () {
+				$(this).parent().find('.form-control').val($(this).val().replace(/C:\\fakepath\\/i, ''));
+			});
+		});
+	})(jQuery);
+</script>

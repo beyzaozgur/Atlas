@@ -61,5 +61,26 @@ namespace CoreDemo.Controllers
 			blogManager.DeleteBlog(values);
 			return Json(new { result = true });
 		}
-    }
+
+		// to set existing values to update page
+		[AllowAnonymous]
+		[HttpGet]
+		public IActionResult BlogUpdate(int id)
+		{
+			CategoryManager categoryManager = new CategoryManager(new EfCategoryRepository());
+			List<SelectListItem> categories = (from x in categoryManager.GetList() select new SelectListItem { Text = x.CategoryName, Value = x.CategoryID.ToString() }).ToList();
+			ViewBag.categories = categories;
+			var values = blogManager.GetByID(id);
+			return View(values);
+		}
+
+		// to update blog data
+		[AllowAnonymous]
+		[HttpPost]
+		public IActionResult BlogUpdate(Blog blog)
+		{
+			blogManager.UpdateBlog(blog);
+			return RedirectToAction("BlogListByWriter", "Blog");
+		}
+	}
 }

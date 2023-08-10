@@ -46,7 +46,7 @@
 								</button>
 							</td>
 							<td>
-								<button type="button" class="btn btn-gradient-warning btn-rounded btn-icon">
+								<button type="button" onclick="editBlog(@item.BlogID)" id="editBtn" class="btn btn-gradient-warning btn-rounded btn-icon">
 									<i class="mdi mdi-tooltip-edit"></i>
 								</button>
 							</td>
@@ -63,12 +63,31 @@
 <script src="~/coreblogtema/web/js/jquery-2.2.3.min.js"></script>
 
 <script>
-	const button = document.getElementById('addBlogBtn');
+	const addButton = document.getElementById('addBlogBtn');
 
-	button.addEventListener('click', function () {
+	addButton.addEventListener('click', function () {
 		const url = '@Url.Action("BlogAdd", "Blog")';
 		window.location.href = url;
 	});
+
+	//function editBlog(id) {
+	//	console.log("ID : " + id);
+	//	$.ajax({
+	//		type: "POST",
+	//		url: "/Blog/BlogUpdate/" + id,
+	//		success: function (response) {
+	//		}
+	//	});
+	//}
+
+	function editBlog(id) {
+		var url = '@Url.Action("BlogUpdate", "Blog")'; // Razor syntax to generate the URL
+
+		// Append the id parameter to the URL
+		var fullUrl = url + '?id=' + id;
+
+		window.location.href = fullUrl; // Navigate to the generated URL
+	}
 
 	function deleteBlog(id) {
 

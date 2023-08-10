@@ -59,9 +59,9 @@ namespace BusinessLayer.Concrete
 			return _blogDal.GetAll().Take(3).ToList();
 		}
 
-		public void UpdateBlog()
+		public void UpdateBlog(Blog blog)
 		{
-			throw new NotImplementedException();
+			_blogDal.Update(blog);
 		}
 
 		public List<Blog> GetBlogListByWriter(int id)
