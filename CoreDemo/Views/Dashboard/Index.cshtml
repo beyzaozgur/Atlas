@@ -52,41 +52,7 @@
 		</div>
 	</div>
 </div>
-<div class="row">
-	<div class="col-12 grid-margin">
-		<div class="card">
-			<div class="card-body">
-				<h4 class="card-title">Recent Blogs</h4>
-				<div class="table-responsive">
-					<table class="table">
-						<tbody>
-							<tr>
-								<td>
-									<img src="~/WriterTema/assets/images/faces/face1.jpg" class="mr-2" alt="image"> David Grey
-								</td>
-								<td> Title </td>
-								<td>
-									<label class="badge badge-gradient-success">Category</label>
-								</td>
-								<td> @DateTime.Now </td>
-							</tr>
-							<tr>
-								<td>
-									<img src="~/WriterTema/assets/images/faces/face1.jpg" class="mr-2" alt="image"> David Grey
-								</td>
-								<td> Title </td>
-								<td>
-									<label class="badge badge-gradient-success">Category</label>
-								</td>
-								<td> @DateTime.Now </td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
+@await Component.InvokeAsync("BlogListDashboard")
 <div class="row">
 	<div class="col-12 grid-margin stretch-card">
 		<div class="card">
