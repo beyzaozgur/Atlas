@@ -53,18 +53,8 @@
 	</div>
 </div>
 @await Component.InvokeAsync("BlogListDashboard")
-<div class="row">
-	<div class="col-12 grid-margin stretch-card">
-		<div class="card">
-			<div class="d-flex mt-10 align-items-top">
-				<img src="~/WriterTema/assets/images/faces/face3.jpg" class="img-sm rounded-circle mr-3" alt="image">
-				<div class="mb-0 flex-grow">
-					<h5 class="mr-2 mb-2">About Writer</h5>
-					<p class="mb-0 font-weight-light">Writer about content</p>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
+
+@await Component.InvokeAsync("WriterAboutOnDashboard")
+
 @await Component.InvokeAsync("CategoryListDashboard")
 
