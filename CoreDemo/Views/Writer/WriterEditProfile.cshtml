@@ -1,0 +1,55 @@
+﻿@model EntityLayer.Concrete.Writer
+
+@{
+	ViewData["Title"] = "WriterEditProfile";
+	Layout = "~/Views/Shared/WriterLayout.cshtml";
+}
+
+@using (Html.BeginForm("WriterEditProfile", "Writer", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+	<div class="col-12 grid-margin stretch-card">
+		<div class="card">
+			<div class="card-body">
+				<h4 class="card-title">Edit Profile</h4>
+				@Html.HiddenFor(x => x.WriterID)
+				<form class="forms-sample">
+					<div class="form-group">
+						<label for="inputName">Name Surname</label>
+						@Html.TextBoxFor(x => x.WriterName, new { @class = "form-control" })
+					</div>
+					<div class="form-group">
+						<label for="inputEmail">Email address</label>
+						@Html.TextBoxFor(x => x.WriterMail, new { @class = "form-control" })
+					</div>
+					<div class="form-group">
+						<label for="inputCity">Şehir</label>
+						<select class="form-control" id="inputCityId" name="WriterCity" placeholder="" required="">
+							<option value="izmir">İzmir</option>
+							<option value="istanbul">İstanbul</option>
+							<option value="ankara">Ankara</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label>Profile Picture</label>
+						<input type="file" name="WriterImage" class="file-upload-default">
+						<div class="input-group col-xs-12">
+							<input type="text" class="form-control file-upload-info" disabled placeholder="Upload Image">
+							<span class="input-group-append">
+								<button class="file-upload-browse btn btn-gradient-primary" type="button">Upload</button>
+							</span>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="exampleTextarea1">About</label>
+						@Html.TextAreaFor(x => x.WriterAbout, 10, 3, new { @class = "form-control" })
+					</div>
+					<button type="submit" class="btn btn-gradient-primary mr-2">Update</button>
+					<button class="btn btn-light">Cancel</button>
+				</form>
+			</div>
+		</div>
+	</div>
+}
+
+<script src="~/coreblogtema/web/js/jquery-2.2.3.min.js"></script>
+<script src="~/writertema/assets/js/file-upload.js"></script>

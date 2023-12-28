@@ -4,6 +4,7 @@ using CoreDemo.ViewModels;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
 using FluentValidation.Results;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoreDemo.Controllers
@@ -12,12 +13,14 @@ namespace CoreDemo.Controllers
 	{
 		WriterManager writerManager = new WriterManager(new EfWriterRepository());
 
+		[AllowAnonymous]
 		[HttpGet]
 		public IActionResult Index()
 		{
 			return View();
 		}
 
+		[AllowAnonymous]
 		[HttpPost]
 		public IActionResult Index(Writer writer)
 		{

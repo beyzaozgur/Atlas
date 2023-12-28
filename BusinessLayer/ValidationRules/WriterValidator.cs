@@ -15,10 +15,10 @@ namespace BusinessLayer.ValidationRules
         {
             RuleFor(x => x.WriterName).NotEmpty().WithMessage("Bu alan boş geçilemez!");
 			RuleFor(x => x.WriterMail).NotEmpty().WithMessage("Bu alan boş geçilemez!");
-			RuleFor(x => x.WriterPassword).NotEmpty().WithMessage("Bu alan boş geçilemez!");
-			RuleFor(x => x.ConfirmPassword).NotEmpty().WithMessage("Bu alan boş geçilemez!");
-			RuleFor(x => x.WriterCity).NotEmpty().WithMessage("Bu alan boş geçilemez!");
-			RuleFor(x => x.WriterImage).NotEmpty().WithMessage("Bu alan boş geçilemez!");
+			//RuleFor(x => x.WriterPassword).NotEmpty().WithMessage("Bu alan boş geçilemez!");
+			//RuleFor(x => x.ConfirmPassword).NotEmpty().WithMessage("Bu alan boş geçilemez!");
+			//RuleFor(x => x.WriterCity).NotEmpty().WithMessage("Bu alan boş geçilemez!");
+			//RuleFor(x => x.WriterImage).NotEmpty().WithMessage("Bu alan boş geçilemez!");
 
 			RuleFor(x => x.WriterName).MinimumLength(2).WithMessage("Ad Soyad 2 karakterden fazla olmalıdır.");
 			RuleFor(x => x.WriterName).MaximumLength(50).WithMessage("Ad Soyad 50 karakterden az olmalıdır.");

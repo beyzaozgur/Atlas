@@ -5,6 +5,7 @@
       var file = $(this).parent().parent().parent().find('.file-upload-default');
       file.trigger('click');
     });
+      console.log('FILE: ' + file);
     $('.file-upload-default').on('change', function() {
       $(this).parent().find('.form-control').val($(this).val().replace(/C:\\fakepath\\/i, ''));
     });
