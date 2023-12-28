@@ -5,19 +5,18 @@
 	Layout = "~/Views/Shared/UserLayout.cshtml";
 }
 
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="~/coreblogtema/web/js/jquery-2.2.3.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
 <section class="main-content-w3layouts-agileits">
 	<div class="container">
-		<h3 class="tittle">Kayıt Ol</h3>
+		<h3 class="tittle">Register</h3>
 		<div class="inner-sec">
 			<div class="login p-5 bg-light mx-auto mw-100">
-				@using (Html.BeginForm("Index", "Register", FormMethod.Post))
+				@using (Html.BeginForm("Index", "Register", FormMethod.Post, new { enctype = "multipart/form-data" }))
 				{
 					<div class="form-row">
 						<div class="col-md-6 mb-3">
-							<label for="validationCustom01">Ad Soyad</label>
+							<label for="validationCustom01">Name Surname</label>
 							@Html.TextBoxFor(x => x.WriterName, new { @class = "form-control" })
 							@Html.ValidationMessageFor(x => x.WriterName, "", new { @class = "text-danger" })
 							@*							<input type="text" class="form-control" id="validationDefault01" name="WriterName" placeholder="" required="">
@@ -46,11 +45,10 @@
 					</div>
 					<div class="form-row">
 						<div class="col-md-6 mb-3">
-							<label for="validationCustom01">Fotoğraf</label>
-							@Html.TextBoxFor(x => x.WriterImage, new { @class = "form-control" })
+							<label for="formFile" class="form-label">Profile Picture</label>
+							<input class="form-control" type="file" name="WriterImage" id="formFile" accept="image/*">
 							@Html.ValidationMessageFor(x => x.WriterImage, "", new { @class = "text-danger" })
-@*							<input type="text" class="form-control" id="validationDefault01" name="WriterImage" placeholder="" required="">
-*@						</div>
+						</div>
 						<div class="col-md-6 mb-3">
 							<label for="validationCustom02">Şehir</label>
 							<select class="form-control" id="validationDefault02" name="WriterCity" placeholder="" required="">
@@ -60,18 +58,20 @@
 							</select>
 						</div>
 					</div>
-					<button type="submit" class="btn btn-primary submit mb-4">Kayıt Ol</button>
+					<button type="submit" class="btn btn-primary submit mb-4">Register</button>
 					<p>
-						<a href="#" id="terms">Tüm şartları okudum, kabul ediyorum.</a>
+						<a href="#" id="terms">I have read all the terms and conditions and I accept them.</a>
 					</p>
 				}
 			</div>
 		</div>
 	</div>
 	<br />
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script src="~/coreblogtema/web/js/jquery-2.2.3.min.js"></script>
+	<script src="~/writertema/assets/js/file-upload.js"></script>
 	<script>
 		$("#terms").click(function () {
-			Swal.fire("Şartlar","Tüm şartların bulunduğu metin.");
-		});
+			Swal.fire("Terms & Conditions","Text that contains all the terms & conditions."});
 	</script>
 </section>

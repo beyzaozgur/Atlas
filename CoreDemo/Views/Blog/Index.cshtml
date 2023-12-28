@@ -23,13 +23,13 @@
 								<ul class="blog-icons my-4">
 									<li>
 										<a href="#">
-											<i class="far fa-calendar-alt"></i> @(((DateTime) item.CreateDate).ToString("dd.MM.yyyy"))
+											<i class="far fa-calendar-alt"></i> @(((DateTime)item.CreateDate).ToString("dd.MM.yyyy"))
 										</a>
 									</li>
 									<li class="mx-2">
 										<a href="#">
 											<i class="far fa-comment"></i> 21
-										</a> 
+										</a>
 									</li>
 									<li>
 										<a href="#">
@@ -41,7 +41,9 @@
 								<h5 class="card-title">
 									<a href="/Blog/BlogReadAll/@item.BlogID">@item.BlogTitle</a>
 								</h5>
- 								<p class="card-text mb-3">@item.BlogContent.Substring(0,item.BlogContent.Substring(0,10).LastIndexOf(" "))...</p>
+								@*  								<p class="card-text mb-3">@item.BlogContent.Substring(0,item.BlogContent.Substring(0,10).LastIndexOf(" "))...</p>
+							*@
+								<p class="card-text mb-3">@item.BlogContent</p>
 								<a href="/Blog/BlogReadAll/@item.BlogID" class="btn btn-primary read-m">Devamını Oku</a>
 							</div>
 						</div>

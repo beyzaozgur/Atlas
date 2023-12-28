@@ -17,5 +17,9 @@ namespace CoreDemo.Models
 		public bool WriterStatus { get; set; }
 
 		public string WriterCity { get; set; }
+
+		public string WriterPassword { get; set; }
+
+		public string ConfirmPassword { get; set; }
 	}
 }

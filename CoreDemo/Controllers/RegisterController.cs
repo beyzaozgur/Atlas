@@ -1,5 +1,6 @@
 ﻿using BusinessLayer.Concrete;
 using BusinessLayer.ValidationRules;
+using CoreDemo.Models;
 using CoreDemo.ViewModels;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
@@ -22,19 +23,36 @@ namespace CoreDemo.Controllers
 
 		[AllowAnonymous]
 		[HttpPost]
-		public IActionResult Index(Writer writer)
+		public IActionResult Index(AddUpdateWriterProfile writer)
 		{
+			Writer w = new Writer();
+
+			w.WriterName = writer.WriterName;
+			w.WriterMail = writer.WriterMail;
+			w.WriterPassword = writer.WriterPassword;
+			w.ConfirmPassword = writer.ConfirmPassword;
+			w.WriterCity = writer.WriterCity;
+			w.WriterAbout = "Hi! I am new blogger in Atlas!";
+			w.WriterStatus = true;
+
+			if (writer.WriterImage != null)
+			{
+				var extension = Path.GetExtension(writer.WriterImage.FileName);
+				var newImageName = Guid.NewGuid() + extension;
+				var location = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/WriterImageFiles/", newImageName);
+				var stream = new FileStream(location, FileMode.Create);
+				writer.WriterImage.CopyTo(stream);
+				w.WriterImage = newImageName;
+			}
+
 			WriterValidator writerValidator = new WriterValidator();
-			ValidationResult validationResults = writerValidator.Validate(writer);
+			ValidationResult validationResults = writerValidator.Validate(w);
 
 			if (validationResults.IsValid)
 			{
-				if (writer.WriterPassword == writer.ConfirmPassword)
+				if (w.WriterPassword == w.ConfirmPassword)
 				{
-					writer.WriterStatus = true;
-					writer.WriterAbout = "Deneme Test";
-
-					writerManager.TAdd(writer);
+					writerManager.TAdd(w);
 					return RedirectToAction("Index", "Blog");
 				} else
 				{
