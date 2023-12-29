@@ -34,6 +34,11 @@ namespace EntityLayer.Concrete
 
 		public List<Blog> Blogs { get; set; }
 
+		public ICollection<Message> SentMessages { get; set; }
 
-	}
+        public ICollection<Message> ReceivedMessages { get; set; }
+
+
+
+    }
 }

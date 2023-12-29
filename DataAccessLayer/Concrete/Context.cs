@@ -21,6 +21,21 @@ namespace DataAccessLayer.Concrete
 			optionsBuilder.UseSqlServer("server=localhost;database=CoreBlogDB;Trusted_Connection=True;TrustServerCertificate=True;");
 		}
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+			modelBuilder.Entity<Message>()
+				.HasOne("Sender")
+				.WithMany("SentMessages")
+				.HasForeignKey("SenderID")
+				.OnDelete(DeleteBehavior.ClientSetNull);
+
+            modelBuilder.Entity<Message>()
+                .HasOne("Receiver")
+                .WithMany("ReceivedMessages")
+                .HasForeignKey("ReceiverID")
+				.OnDelete(DeleteBehavior.ClientSetNull);
+        }
+
         public DbSet<About> Abouts { get; set; }
 		public DbSet<Blog> Blogs { get; set; }
 		public DbSet<Category> Categories { get; set; }
@@ -30,8 +45,7 @@ namespace DataAccessLayer.Concrete
 		public DbSet<NewsLetter> NewsLetters { get; set; }
 		public DbSet<BlogRating> BlogRatings { get; set; }
 		public DbSet<Notification> Notifications { get; set; }
-		public DbSet<Message> Messages { get; set; }
+        public DbSet<Message> Message { get; set; }
 
-
-	}
+    }
 }
