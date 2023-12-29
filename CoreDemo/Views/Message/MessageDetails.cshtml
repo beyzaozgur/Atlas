@@ -1,0 +1,27 @@
+﻿@model EntityLayer.Concrete.Message
+
+@{
+	ViewData["Title"] = "MessageDetails";
+	Layout = "~/Views/Shared/WriterLayout.cshtml";
+}
+
+<div class="col-12 grid-margin stretch-card">
+	<div class="card">
+		<div class="card-body">
+			<h4 class="card-title">Message Details</h4>
+			<div class="form-group">
+				<label for="msgSubject">Sender</label>
+				<text class="form-control" id="msgSubject">@Model.Sender.WriterName</text>
+			</div>
+			<div class="form-group">
+				<label for="msgSubject">Subject</label>
+				<text class="form-control" id="msgSubject">@Model.Subject</text>
+			</div>
+			<div class="form-group">
+				<label for="msgContent">Content</label>
+				<textarea class="form-control" id="msgContent" rows="4" disabled>@Model.MessageDetails</textarea>
+			</div>
+			<button type="submit" class="btn btn-gradient-primary mr-2">Reply</button>
+		</div>
+	</div>
+</div>

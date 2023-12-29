@@ -1,0 +1,89 @@
+﻿@using EntityLayer.Concrete
+@model List<Message>
+
+@{
+	ViewData["Title"] = "Inbox";
+	Layout = "~/Views/Shared/WriterLayout.cshtml";
+}
+
+<div class="grid-margin stretch-card">
+	<div class="card">
+		<div class="card-body">
+			<div align="right">
+				<button type="submit" class="btn btn-gradient-primary mr-2">Send Message</button>
+			</div>
+			<h4 class="card-title">Inbox</h4>
+			<p class="card-description">
+			</p>
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>Subject</th>
+						<th>Sender</th>
+						<th>Date</th>
+						<th>Read</th>
+						<th>Delete</th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (var item in Model)
+					{
+						<tr>
+							<td>@item.Subject</td>
+							<td>@item.Sender.WriterName</td>
+							<td>@(((DateTime)item.MessageDate).ToString("dd.MM.yyyy"))</td>
+							<td>
+								<button type="button" id="readBtn" onclick="location.href='@Url.Action("MessageDetails","Message", new { id = item.MessageID })'" class="btn btn-gradient-success btn-rounded btn-icon">
+									<i class="mdi mdi-book"></i>
+								</button>
+							</td>
+							<td>
+								<button type="button" id="deleteBtn" onclick="deleteMessage(@item.MessageID)" class="btn btn-gradient-danger btn-rounded btn-icon">
+									<i class="mdi mdi-delete"></i>
+								</button>
+							</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="~/coreblogtema/web/js/jquery-2.2.3.min.js"></script>
+
+<script>
+	function deleteMessage(id) {
+
+		Swal.fire({
+			title: 'Are you sure?',
+			text: "You won't be able to revert this!",
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Yes, delete this message!'
+		}).then((result) => {
+			if (result.isConfirmed) {
+				$.ajax({
+					type: "POST",
+					url: "/Message/MessageDelete/" + id,
+					success: function (response) {
+						if (response.result) {
+							Swal.fire(
+								'Deleted!',
+								'Message has been deleted.',
+								'success'
+							).then(function () {
+								location.reload();
+							}
+							);
+						}
+					}
+				});
+			}
+		})
+	}
+</script>
+
