@@ -40,7 +40,7 @@ namespace BusinessLayer.Concrete
 
 		public void TAdd(Message t)
         {
-            throw new NotImplementedException();
+            _messageDal.Insert(t);
         }
 
         public void TDelete(Message t)

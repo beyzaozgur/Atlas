@@ -33,7 +33,7 @@
 							<td>@item.Sender.WriterName</td>
 							<td>@(((DateTime)item.MessageDate).ToString("dd.MM.yyyy"))</td>
 							<td>
-								<button type="button" id="readBtn" onclick="location.href='@Url.Action("MessageDetails","Message", new { id = item.MessageID })'" class="btn btn-gradient-success btn-rounded btn-icon">
+								<button type="button" id="readBtn" onclick="readDetails(@item.MessageID)" class="btn btn-gradient-success btn-rounded btn-icon">
 									<i class="mdi mdi-book"></i>
 								</button>
 							</td>
@@ -54,6 +54,15 @@
 <script src="~/coreblogtema/web/js/jquery-2.2.3.min.js"></script>
 
 <script>
+
+	function readDetails(id) {
+		var url = '@Url.Action("MessageDetails", "Message")';
+
+		var fullUrl = url + '?id=' + id;
+
+		window.location.href = fullUrl; // Navigate to the generated URL
+	}
+
 	function deleteMessage(id) {
 
 		Swal.fire({

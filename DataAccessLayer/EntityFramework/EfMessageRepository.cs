@@ -25,7 +25,8 @@ namespace DataAccessLayer.EntityFramework
 		{
 			using (var c = new Context())
 			{
-				return c.Messages.Include(x => x.Sender).Where(y => y.MessageID == id).First();
+                var msg = c.Messages.Include(x => x.Sender).Where(y => y.MessageID == id).ToList().FirstOrDefault();
+				return msg;
 			}
 		}
 	}
