@@ -13,11 +13,11 @@
 <div class="row">
 	<div class="col-lg-12">
 		<div class="ibox ">
+			<input style="float: right; margin-bottom: 10px;" type="button" class="btn btn-w-m btn-success" value="Add Category" onclick="navigate()">
 			<div class="ibox-title">
 				<h5>Categories</h5>
 			</div>
 			<div class="ibox-content">
-
 				<table class="table">
 					<thead>
 						<tr>
@@ -36,11 +36,12 @@
 								<td>@item.CategoryID</td>
 								<td>@item.CategoryName</td>
 								<td>@item.CategoryDescription</td>
-								@if(item.CategoryStatus == true)
+								@if (item.CategoryStatus == true)
 								{
 									<td>Active</td>
 
-								} else
+								}
+								else
 								{
 									<td>Passive</td>
 								}
@@ -62,4 +63,11 @@
 		</div>
 	</div>
 </div>
-@Html.PagedListPager((IPagedList)Model, page=> Url.Action("Index", new {page}))
+@Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }))
+
+<script>
+	function navigate() {
+		const url = '@Url.Action("AddCategory", "Category")';
+		window.location.href = url;
+	}
+</script>

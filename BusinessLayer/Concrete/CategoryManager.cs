@@ -18,9 +18,29 @@ namespace BusinessLayer.Concrete
             _categoryDal = categoryDal;
         }
 
-        public List<Category> GetList()
+		public Category GetById(int Id)
+		{
+			throw new NotImplementedException();
+		}
+
+		public List<Category> GetAll()
 		{
 			return _categoryDal.GetAll();
+		}
+
+		public void TAdd(Category t)
+		{
+			_categoryDal.Insert(t);
+		}
+
+		public void TDelete(Category t)
+		{
+			throw new NotImplementedException();
+		}
+
+		public void TUpdate(Category t)
+		{
+			throw new NotImplementedException();
 		}
 	}
 }

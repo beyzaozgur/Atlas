@@ -36,7 +36,7 @@ namespace CoreDemo.Controllers
         public IActionResult BlogAdd()
         {
 			CategoryManager categoryManager = new CategoryManager(new EfCategoryRepository());
-			List<SelectListItem> categories = (from x in categoryManager.GetList() select new SelectListItem { Text = x.CategoryName, Value = x.CategoryID.ToString() }).ToList();
+			List<SelectListItem> categories = (from x in categoryManager.GetAll() select new SelectListItem { Text = x.CategoryName, Value = x.CategoryID.ToString() }).ToList();
 			ViewBag.categories = categories;
             return View();
         }
@@ -68,7 +68,7 @@ namespace CoreDemo.Controllers
 		public IActionResult BlogUpdate(int id)
 		{
 			CategoryManager categoryManager = new CategoryManager(new EfCategoryRepository());
-			List<SelectListItem> categories = (from x in categoryManager.GetList() select new SelectListItem { Text = x.CategoryName, Value = x.CategoryID.ToString() }).ToList();
+			List<SelectListItem> categories = (from x in categoryManager.GetAll() select new SelectListItem { Text = x.CategoryName, Value = x.CategoryID.ToString() }).ToList();
 			ViewBag.categories = categories;
 			var values = blogManager.GetByID(id);
 			return View(values);
