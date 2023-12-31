@@ -1,8 +1,65 @@
-﻿
+﻿@using EntityLayer.Concrete
+@using X.PagedList
+@using X.PagedList.Mvc.Core
+@model IPagedList<EntityLayer.Concrete.Category>
+
 @{
-    ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/AdminLayout.cshtml";
+	ViewData["Title"] = "Index";
+	Layout = "~/Views/Shared/AdminLayout.cshtml";
 }
+<link href="~/inspinia-gh-pages/css/style.css" rel="stylesheet" />
+<link href="~/inspinia-gh-pages/font-awesome/css/font-awesome.css" rel="stylesheet">
 
-<h1>Index</h1>
+<div class="row">
+	<div class="col-lg-12">
+		<div class="ibox ">
+			<div class="ibox-title">
+				<h5>Categories</h5>
+			</div>
+			<div class="ibox-content">
 
+				<table class="table">
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>Category</th>
+							<th>Description</th>
+							<th>Status</th>
+							<th>Edit</th>
+							<th>Delete</th>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach (var item in Model)
+						{
+							<tr>
+								<td>@item.CategoryID</td>
+								<td>@item.CategoryName</td>
+								<td>@item.CategoryDescription</td>
+								@if(item.CategoryStatus == true)
+								{
+									<td>Active</td>
+
+								} else
+								{
+									<td>Passive</td>
+								}
+								<td>
+									<button type="button" onclick="editBlog(@item.CategoryID)" id="editBtn" class="btn btn-warning btn-rounded">
+										<i class="fa fa-edit"></i>
+									</button>
+								</td>
+								<td>
+									<button type="button" id="deleteBtn" onclick="deleteBlog(@item.CategoryID)" class="btn btn-danger btn-rounded">
+										<i class="fa fa-trash"></i>
+									</button>
+								</td>
+							</tr>
+						}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+@Html.PagedListPager((IPagedList)Model, page=> Url.Action("Index", new {page}))
