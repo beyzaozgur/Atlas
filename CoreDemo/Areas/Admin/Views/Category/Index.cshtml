@@ -46,12 +46,12 @@
 									<td>Passive</td>
 								}
 								<td>
-									<button type="button" onclick="editBlog(@item.CategoryID)" id="editBtn" class="btn btn-warning btn-rounded">
+									<button type="button" onclick="editCategory(@item.CategoryID)" id="editBtn" class="btn btn-warning btn-rounded">
 										<i class="fa fa-edit"></i>
 									</button>
 								</td>
 								<td>
-									<button type="button" id="deleteBtn" onclick="deleteBlog(@item.CategoryID)" class="btn btn-danger btn-rounded">
+									<button type="button" id="deleteBtn" onclick="deleteCategory(@item.CategoryID)" class="btn btn-danger btn-rounded">
 										<i class="fa fa-trash"></i>
 									</button>
 								</td>
@@ -65,9 +65,49 @@
 </div>
 @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }))
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="~/coreblogtema/web/js/jquery-2.2.3.min.js"></script>
+
 <script>
 	function navigate() {
 		const url = '@Url.Action("AddCategory", "Category")';
 		window.location.href = url;
+	}
+
+	function editCategory(id) {
+		var url = '@Url.Action("EditCategory", "Category")';
+		var fullUrl = url + '?id=' + id;
+		window.location.href = fullUrl;
+	}
+
+	function deleteCategory(id) {
+		Swal.fire({
+			title: 'Are you sure?',
+			text: "You won't be able to revert this!",
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Yes, delete this category!'
+		}).then((result) => {
+			if (result.isConfirmed) {
+				$.ajax({
+					type: "POST",
+					url: "/Admin/Category/DeleteCategory/" + id,
+					success: function (response) {
+						if (response.result) {
+							Swal.fire(
+								'Deleted!',
+								'Category has been deleted.',
+								'success'
+							).then(function () {
+								location.reload();
+							}
+							);
+						}
+					}
+				});
+			}
+		})
 	}
 </script>

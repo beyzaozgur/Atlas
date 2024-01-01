@@ -1,0 +1,47 @@
+﻿@model EntityLayer.Concrete.Category
+
+@{
+    ViewData["Title"] = "EditCategory";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<div class="row">
+	<div class="col-lg-12">
+		<div class="ibox ">
+			<div class="ibox-title">
+				<h5>Edit Category</h5>
+			</div>
+			<div class="ibox-content">
+				<form method="post" action="/Admin/Category/EditCategory/@Model.CategoryID">
+					@Html.HiddenFor(x => x.CategoryID)
+					<div class="form-group row">
+						<label class="col-lg-2 col-form-label">Category</label>
+						<div class="col-lg-10">
+							@Html.TextBoxFor(x => x.CategoryName, new { @class = "form-control"})
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-lg-2 col-form-label">Description</label>
+						<div class="col-lg-10">@Html.TextAreaFor(x => x.CategoryDescription, 10, 3, new { @class = "form-control" })</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-lg-2 col-form-label">Status</label>
+						<div class="col-sm-10">
+							@* <div class="i-checks"><label> <input type="radio" value="true" name="CategoryStatus" @(Model.CategoryStatus == true ? "checked" : "")> <i></i> Active </label></div>
+							<div class="i-checks"><label> <input type="radio" value="false" name="CategoryStatus" @(Model.CategoryStatus == false ? "checked" : "")> <i></i> Passive </label></div> *@
+							@Html.RadioButtonFor(x => x.CategoryStatus, "true") @Html.Label("Active") &nbsp;&nbsp;
+							@Html.RadioButtonFor(x => x.CategoryStatus, "false") @Html.Label("Passive")
+							
+						</div>
+					</div>
+					<div class="form-group row">
+						<div class="col-lg-12">
+							<button style="float: right;" class="btn btn-sm btn-success" type="submit">Save Changes</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
