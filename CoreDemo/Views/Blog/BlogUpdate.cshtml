@@ -9,7 +9,7 @@
 	<div class="card">
 		<div class="card-body">
 			<h4 class="card-title">Update Blog</h4>
-			<form method="post" action="/Blog/BlogUpdate/" class="forms-sample">
+			<form method="post" action="/Blog/BlogUpdate/" class="forms-sample" enctype="multipart/form-data">
 				@Html.HiddenFor(x => x.BlogID)
 				@Html.HiddenFor(x => x.BlogStatus)
 				@Html.HiddenFor(x => x.CreateDate)
@@ -23,9 +23,9 @@
 				</div>
 				<div class="form-group">
 					<label>Image</label>
-					<input type="file" name="img[]" class="file-upload-default">
+					<input class="file-upload-default" type="file" name="BlogImage" id="formFile" accept="image/*">
 					<div class="input-group col-xs-12">
-						<input type="text" class="form-control file-upload-info" disabled placeholder="Upload Image" name="BlogImage">
+						<input type="text" class="form-control file-upload-info" disabled placeholder="@Model.BlogImage" name="BlogImage">
 						<span class="input-group-append">
 							<button class="file-upload-browse btn btn-gradient-primary" type="button">Upload</button>
 						</span>

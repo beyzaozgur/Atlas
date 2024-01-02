@@ -47,7 +47,7 @@ namespace CoreDemo.Controllers
 
 		[AllowAnonymous]
 		[HttpPost]
-		public IActionResult WriterEditProfile(AddUpdateWriterProfile writer)
+		public IActionResult WriterEditProfile(AddUpdateWriterModel writer)
 		{
 			Writer w = new Writer();
 

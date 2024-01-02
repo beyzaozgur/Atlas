@@ -1,4 +1,5 @@
 ﻿using BusinessLayer.Concrete;
+using CoreDemo.Models;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Authorization;
@@ -43,14 +44,29 @@ namespace CoreDemo.Controllers
 
         [AllowAnonymous]
         [HttpPost]
-        public IActionResult BlogAdd(Blog blog)
+        public IActionResult BlogAdd(AddUpdateBlogModel b)
         {
+			Blog blog = new Blog();
+
+			blog.BlogTitle = b.BlogTitle;
+			blog.BlogContent = b.BlogContent;
 			blog.BlogStatus = false;
 			blog.CreateDate = DateTime.Now;
-			blog.BlogImage = "~/CoreBlogTema/web/images/3.jpg";
-			blog.BlogThumbnailImage = "~/CoreBlogTema/web/images/3.jpg";
             blog.WriterID = 1;
-			blogManager.TAdd(blog);
+			blog.CategoryID = b.CategoryID;
+
+            if (b.BlogImage != null)
+            {
+                var extension = Path.GetExtension(b.BlogImage.FileName);
+                var newImageName = Guid.NewGuid() + extension;
+                var location = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/BlogImages/", newImageName);
+                var stream = new FileStream(location, FileMode.Create);
+                b.BlogImage.CopyTo(stream);
+                blog.BlogImage = newImageName;
+				blog.BlogThumbnailImage = newImageName;
+            }
+
+            blogManager.TAdd(blog);
 			return RedirectToAction("BlogListByWriter", "Blog");
         }
 
@@ -77,8 +93,29 @@ namespace CoreDemo.Controllers
 		// to update blog data
 		[AllowAnonymous]
 		[HttpPost]
-		public IActionResult BlogUpdate(Blog blog)
+		public IActionResult BlogUpdate(AddUpdateBlogModel b)
 		{
+			Blog blog = new Blog();
+
+			blog.BlogID = b.BlogID;
+			blog.BlogTitle = b.BlogTitle;
+			blog.BlogContent = b.BlogContent;
+			blog.BlogStatus = false;
+			blog.CreateDate = DateTime.Now;
+			blog.WriterID = 1;
+			blog.CategoryID = b.CategoryID;
+
+			if (b.BlogImage != null)
+			{
+				var extension = Path.GetExtension(b.BlogImage.FileName);
+				var newImageName = Guid.NewGuid() + extension;
+				var location = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/BlogImages/", newImageName);
+				var stream = new FileStream(location, FileMode.Create);
+				b.BlogImage.CopyTo(stream);
+				blog.BlogImage = newImageName;
+				blog.BlogThumbnailImage = newImageName;
+			}
+
 			blogManager.TUpdate(blog);
 			return RedirectToAction("BlogListByWriter", "Blog");
 		}

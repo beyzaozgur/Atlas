@@ -2,7 +2,7 @@
 
 namespace CoreDemo.Models
 {
-	public class AddUpdateWriterProfile
+	public class AddUpdateWriterModel
 	{
 		public int WriterID { get; set; }
 

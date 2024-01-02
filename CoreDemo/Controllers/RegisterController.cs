@@ -23,7 +23,7 @@ namespace CoreDemo.Controllers
 
 		[AllowAnonymous]
 		[HttpPost]
-		public IActionResult Index(AddUpdateWriterProfile writer)
+		public IActionResult Index(AddUpdateWriterModel writer)
 		{
 			Writer w = new Writer();
 
