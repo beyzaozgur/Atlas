@@ -20,7 +20,7 @@ namespace CoreDemo.Controllers
         public IActionResult SubscribeMail(NewsLetter newsLetter)
 		{
 			newsLetter.MailStatus = true;
-			newsLetterManager.AddNewsLetter(newsLetter);
+			newsLetterManager.TAdd(newsLetter);
             return Json(new { result = true });
         }
 	}

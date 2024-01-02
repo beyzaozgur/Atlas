@@ -20,7 +20,7 @@ namespace CoreDemo.Controllers
 		public IActionResult BlogReadAll(int id)
 		{
 			ViewBag.Id = id;
-			var values = blogManager.GetBlogByID(id);
+			var values = blogManager.GetById(id);
 			return View(values);	
 		}
 
@@ -50,15 +50,15 @@ namespace CoreDemo.Controllers
 			blog.BlogImage = "~/CoreBlogTema/web/images/3.jpg";
 			blog.BlogThumbnailImage = "~/CoreBlogTema/web/images/3.jpg";
             blog.WriterID = 1;
-			blogManager.AddBlog(blog);
+			blogManager.TAdd(blog);
 			return RedirectToAction("BlogListByWriter", "Blog");
         }
 
         [AllowAnonymous]
         public IActionResult BlogDelete(int id)
         {
-			var values = blogManager.GetByID(id);
-			blogManager.DeleteBlog(values);
+			var values = blogManager.GetById(id);
+			blogManager.TDelete(values);
 			return Json(new { result = true });
 		}
 
@@ -70,7 +70,7 @@ namespace CoreDemo.Controllers
 			CategoryManager categoryManager = new CategoryManager(new EfCategoryRepository());
 			List<SelectListItem> categories = (from x in categoryManager.GetAll() select new SelectListItem { Text = x.CategoryName, Value = x.CategoryID.ToString() }).ToList();
 			ViewBag.categories = categories;
-			var values = blogManager.GetByID(id);
+			var values = blogManager.GetById(id);
 			return View(values);
 		}
 
@@ -79,7 +79,7 @@ namespace CoreDemo.Controllers
 		[HttpPost]
 		public IActionResult BlogUpdate(Blog blog)
 		{
-			blogManager.UpdateBlog(blog);
+			blogManager.TUpdate(blog);
 			return RedirectToAction("BlogListByWriter", "Blog");
 		}
 	}

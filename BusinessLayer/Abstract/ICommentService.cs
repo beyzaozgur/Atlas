@@ -7,10 +7,8 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer.Abstract
 {
-	internal interface ICommentService
+	internal interface ICommentService : IGenericService<Comment>
 	{
-		void CommentAdd(Comment comment);
-
 		List<Comment> GetListByBlogId(int id);
 
 		int GetCommentCountByWriterId(int id);

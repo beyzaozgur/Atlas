@@ -14,7 +14,7 @@ namespace CoreDemo.Controllers
 		[AllowAnonymous]
 		public IActionResult Index()
 		{
-			ViewBag.allBlogsCard = blogManager.GetList().Count();
+			ViewBag.allBlogsCard = blogManager.GetAll().Count();
 			ViewBag.myBlogsCard = blogManager.GetBlogListByWriter(1).Count();
 			ViewBag.myCommentsCard = commentManager.GetCommentCountByWriterId(1);
 

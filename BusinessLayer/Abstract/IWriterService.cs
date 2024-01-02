@@ -10,6 +10,5 @@ namespace BusinessLayer.Abstract
 {
 	public interface IWriterService: IGenericService<Writer>
 	{
-		void UpdateWriterProfile(Writer writer);
 	}
 }

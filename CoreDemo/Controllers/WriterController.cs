@@ -73,7 +73,7 @@ namespace CoreDemo.Controllers
 
 			if(results.IsValid)
 			{
-				writerManager.UpdateWriterProfile(w);
+				writerManager.TUpdate(w);
 				return RedirectToAction("Index", "Dashboard");
 			}
 			else

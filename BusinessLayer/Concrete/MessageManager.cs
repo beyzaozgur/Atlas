@@ -50,7 +50,7 @@ namespace BusinessLayer.Concrete
 
         public void TUpdate(Message t)
         {
-            throw new NotImplementedException();
+            _messageDal.Update(t);
         }
     }
 }

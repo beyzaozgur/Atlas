@@ -20,7 +20,7 @@ namespace BusinessLayer.Concrete
 
 		public List<Writer> GetAll()
 		{
-			throw new NotImplementedException();
+			return _writerDal.GetAll();
 		}
 
 		public Writer GetById(int Id)
@@ -43,9 +43,9 @@ namespace BusinessLayer.Concrete
 			_writerDal.Update(t);
 		}
 
-		public void UpdateWriterProfile(Writer writer)
-		{
-			_writerDal.WriterProfileUpdate(writer);
-		}
+		//public void UpdateWriterProfile(Writer writer)
+		//{
+		//	_writerDal.WriterProfileUpdate(writer);
+		//}
 	}
 }

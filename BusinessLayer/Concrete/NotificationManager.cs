@@ -25,22 +25,22 @@ namespace BusinessLayer.Concrete
 
 		public Notification GetById(int Id)
 		{
-			throw new NotImplementedException();
+			return _notificationDal.GetByID(Id);
 		}
 
 		public void TAdd(Notification t)
 		{
-			throw new NotImplementedException();
+			_notificationDal.Insert(t);
 		}
 
 		public void TDelete(Notification t)
 		{
-			throw new NotImplementedException();
+			_notificationDal.Delete(t);	
 		}
 
 		public void TUpdate(Notification t)
 		{
-			throw new NotImplementedException();
+			_notificationDal.Update(t);
 		}
 	}
 }
