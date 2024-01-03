@@ -20,7 +20,6 @@ namespace CoreDemo.Controllers
 
 		public IActionResult BlogReadAll(int id)
 		{
-			ViewBag.Id = id;
 			var values = blogManager.GetById(id);
 			return View(values);	
 		}
@@ -50,7 +49,7 @@ namespace CoreDemo.Controllers
 
 			blog.BlogTitle = b.BlogTitle;
 			blog.BlogContent = b.BlogContent;
-			blog.BlogStatus = false;
+			blog.BlogStatus = true;
 			blog.CreateDate = DateTime.Now;
             blog.WriterID = 1;
 			blog.CategoryID = b.CategoryID;
