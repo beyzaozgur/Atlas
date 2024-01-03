@@ -52,6 +52,7 @@ namespace CoreDemo.Controllers
 			Writer w = new Writer();
 
 			w.WriterID = writer.WriterID;
+			w.WriterPassword = writer.WriterPassword;
 			w.WriterName = writer.WriterName;
 			w.WriterMail = writer.WriterMail;
 			w.WriterCity = writer.WriterCity;
