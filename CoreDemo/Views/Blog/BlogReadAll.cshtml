@@ -59,10 +59,10 @@
 						<p>
 							@Model.BlogContent
 						</p>
-						<a href="/Blog/Index/" class="btn btn-primary read-m">Blog Listesi</a>
+						<a href="/Blog/Index/" class="btn btn-primary read-m">Return to Popular Blogs</a>
 					</div>
 					@await Component.InvokeAsync("CommentListByBlog", new { id = Model.BlogID })
-					@await Html.PartialAsync("~/Views/Comment/AddComment.cshtml")
+					@await Html.PartialAsync("~/Views/Comment/AddComment.cshtml", Model)
 				</div>
 
 				<!--//left-->

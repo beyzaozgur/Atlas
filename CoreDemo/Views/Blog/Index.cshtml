@@ -42,7 +42,7 @@
 									<a onclick="readAll(@item.BlogID)">@item.BlogTitle</a>
 								</h5>
 								<p class="card-text mb-3">@item.BlogContent.Substring(0, item.BlogContent.Substring(0, 100).LastIndexOf(" "))...</p>
-								<button class="btn btn-primary read-m" onclick="readAll(@item.BlogID)">Read More</button>
+								<a class="btn btn-primary read-m" onclick="readAll(@item.BlogID)">Read More</a>
 							</div>
 						</div>
 					}

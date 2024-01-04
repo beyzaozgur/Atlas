@@ -24,7 +24,7 @@ namespace CoreDemo.Controllers
         {
 			comment.CommentDate = DateTime.Now;
 			comment.CommentStatus = true;
-			comment.BlogID = 2;
+			//comment.BlogID = 2;
 			commentManager.TAdd(comment);
             return Json(new { result = true });
         }

@@ -1,13 +1,15 @@
-﻿<div class="comment-top">
-	<h4>Yorum Yapın</h4>
+﻿@model EntityLayer.Concrete.Blog
+
+<div class="comment-top">
+	<h4>Add a Comment</h4>
 	<div class="comment-bottom">
 		<form method="post">
-			<input class="form-control" style="color:black;" type="text" id="username" name="CommentUserName" placeholder="Ad Soyad" required="">
+			<input class="form-control" style="color:black;" type="text" id="username" name="CommentUserName" placeholder="Name Surname" required="">
 
-			<input class="form-control" style="color:black;" type="text" id="title" name="CommentTitle" placeholder="Başlık" required="">
+			<input class="form-control" style="color:black;" type="text" id="title" name="CommentTitle" placeholder="Title" required="">
 
-			<textarea class="form-control" style="color:black;" id="content" name="CommentContent" placeholder="Yorum..." required=""></textarea>
-			<button type="submit" id="comment-btn" class="btn btn-primary submit">Gönder</button>
+			<textarea class="form-control" style="color:black;" id="content" name="CommentContent" placeholder="Comment..." required=""></textarea>
+			<button type="submit" id="comment-btn" class="btn btn-primary submit">Send</button>
 		</form>
 	</div>
 </div>
@@ -24,6 +26,7 @@
 			CommentUserName: $("#username").val(),
 			CommentTitle: $("#title").val(),
 			CommentContent: $("#content").val(),
+			BlogID: @Model.BlogID
 		};
 
 		$.ajax({
