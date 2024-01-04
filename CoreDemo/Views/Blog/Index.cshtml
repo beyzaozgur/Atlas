@@ -8,7 +8,7 @@
 
 <section class="main-content-w3layouts-agileits">
 	<div class="container">
-		<h3 class="tittle">Gönderiler</h3>
+		<h3 class="tittle">Posts</h3>
 		<div class="inner-sec">
 			<!--left-->
 			<div class="left-blog-info-w3layouts-agileits text-left">
@@ -16,7 +16,7 @@
 					@foreach (var item in Model)
 					{
 						<div class="col-lg-4 card">
-							<a href="single.html">
+							<a href="/Blog/BlogReadAll/@item.BlogID">
 								<img src="~/BlogImages/@item.BlogImage" class="card-img-top img-fluid" alt="">
 							</a>
 							<div class="card-body">
@@ -28,7 +28,7 @@
 									</li>
 									<li class="mx-2">
 										<a href="#">
-											<i class="far fa-comment"></i> 21
+											<i class="far fa-comment"></i> 0
 										</a>
 									</li>
 									<li>
@@ -41,10 +41,8 @@
 								<h5 class="card-title">
 									<a href="/Blog/BlogReadAll/@item.BlogID">@item.BlogTitle</a>
 								</h5>
-								 	<p class="card-text mb-3">@item.BlogContent.Substring(0,item.BlogContent.Substring(0,10).LastIndexOf(" "))...</p>
-							
-								<p class="card-text mb-3">@item.BlogContent</p>
-								<a href="/Blog/BlogReadAll/@item.BlogID" class="btn btn-primary read-m">Devamını Oku</a>
+								<p class="card-text mb-3">@item.BlogContent.Substring(0, item.BlogContent.Substring(0, 100).LastIndexOf(" "))...</p>
+								<a href="/Blog/BlogReadAll/@item.BlogID" class="btn btn-primary read-m">Read More</a>
 							</div>
 						</div>
 					}
