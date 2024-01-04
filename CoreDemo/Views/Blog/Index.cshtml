@@ -16,7 +16,7 @@
 					@foreach (var item in Model)
 					{
 						<div class="col-lg-4 card">
-							<a href="/Blog/BlogReadAll/@item.BlogID">
+							<a onclick="readAll(@item.BlogID)">
 								<img src="~/BlogImages/@item.BlogImage" class="card-img-top img-fluid" alt="">
 							</a>
 							<div class="card-body">
@@ -39,10 +39,10 @@
 
 								</ul>
 								<h5 class="card-title">
-									<a href="/Blog/BlogReadAll/@item.BlogID">@item.BlogTitle</a>
+									<a onclick="readAll(@item.BlogID)">@item.BlogTitle</a>
 								</h5>
 								<p class="card-text mb-3">@item.BlogContent.Substring(0, item.BlogContent.Substring(0, 100).LastIndexOf(" "))...</p>
-								<a href="/Blog/BlogReadAll/@item.BlogID" class="btn btn-primary read-m">Read More</a>
+								<button class="btn btn-primary read-m" onclick="readAll(@item.BlogID)">Read More</button>
 							</div>
 						</div>
 					}
@@ -52,4 +52,14 @@
 		</div>
 	</div>
 </section>
+
+<script src="~/coreblogtema/web/js/jquery-2.2.3.min.js"></script>
+
+<script>
+	function readAll(id) {
+		var url = '@Url.Action("BlogReadAll", "Blog")';
+		var fullUrl = url + '?id=' + id;
+		window.location.href = fullUrl;
+	}
+</script>
 
