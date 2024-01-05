@@ -1,29 +1,40 @@
 ﻿@model IEnumerable<EntityLayer.Concrete.Blog>
 
 <div class="tech-btm">
-	<h4>Top stories of the week</h4>
+	<h4>Top posts of the week</h4>
 
-	@foreach(var item in Model) {
-	<div class="blog-grids row mb-3">
-		<div class="col-md-5 blog-grid-left">
-			<a href="single.html">
-				<img src="@item.BlogImage" class="img-fluid" alt="">
-			</a>
-		</div>
-		<div class="col-md-7 blog-grid-right">
-
-			<h5>
-				<a href="/Blog/BlogReadAll/@item.BlogID">@item.BlogTitle</a>
-			</h5>
-			<div class="sub-meta">
-				<span>
-					<i class="far fa-clock"></i> @item.CreateDate
-				</span>
+	@foreach (var item in Model)
+	{
+		<div class="blog-grids row mb-3">
+			<div class="col-md-5 blog-grid-left">
+				<a href="single.html">
+					<img src="~/BlogImages/@item.BlogImage" class="img-fluid" alt="">
+				</a>
 			</div>
-		</div>
+			<div class="col-md-7 blog-grid-right">
 
-	</div>
+				<h5>
+					<a onclick="readAll(@item.BlogID)">@item.BlogTitle</a>
+				</h5>
+				<div class="sub-meta">
+					<span>
+						<i class="far fa-clock"></i> @item.CreateDate
+					</span>
+				</div>
+			</div>
+
+		</div>
 	}
 </div>
+
+<script src="~/coreblogtema/web/js/jquery-2.2.3.min.js"></script>
+
+<script>
+	function readAll(id) {
+		var url = '@Url.Action("BlogReadAll", "Blog")';
+		var fullUrl = url + '?id=' + id;
+		window.location.href = fullUrl;
+	}
+</script>
 
 
