@@ -4,6 +4,7 @@ using EntityLayer.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -25,7 +26,7 @@ namespace BusinessLayer.Concrete
 
 		public List<Category> GetAll()
 		{
-			return _categoryDal.GetAll();
+			return _categoryDal.GetAll(x => x.CategoryStatus == true);
 		}
 
 		public void TAdd(Category t)
@@ -41,6 +42,11 @@ namespace BusinessLayer.Concrete
 		public void TUpdate(Category t)
 		{
 			_categoryDal.Update(t);
+		}
+
+		public int GetBlogCountByCategory(int id)
+		{
+			return _categoryDal.GetBlogCountByCategoryID(id);
 		}
 	}
 }

@@ -42,10 +42,5 @@ namespace BusinessLayer.Concrete
 		{
 			_writerDal.Update(t);
 		}
-
-		//public void UpdateWriterProfile(Writer writer)
-		//{
-		//	_writerDal.WriterProfileUpdate(writer);
-		//}
 	}
 }

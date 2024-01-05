@@ -18,10 +18,6 @@ namespace BusinessLayer.Concrete
         {
 			_commentDal = commentDal;   
         }
-  //      public void CommentAdd(Comment comment)
-		//{
-		//	_commentDal.Insert(comment);
-		//}
 
 		public List<Comment> GetListByBlogId(int id)
 		{

@@ -43,11 +43,5 @@ namespace BusinessLayer.Concrete
 			_newsLetterDal.Update(t);
 		}
 
-
-
-		//      public void AddNewsLetter(NewsLetter newsLetter)
-		//{
-		//	_newsLetterDal.Insert(newsLetter);
-		//}
 	}
 }

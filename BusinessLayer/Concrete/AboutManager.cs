@@ -16,10 +16,6 @@ namespace BusinessLayer.Concrete
         {
 			_aboutDal = aboutDal;
         }
-  //      public List<About> GetAbout()
-		//{
-		//	return _aboutDal.GetAll();
-		//}
 
 		public List<About> GetAll()
 		{
