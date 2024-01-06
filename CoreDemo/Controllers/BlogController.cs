@@ -12,14 +12,20 @@ namespace CoreDemo.Controllers
 	{
 
 		BlogManager blogManager = new BlogManager(new EfBlogRepository());
+		CommentManager commentManager = new CommentManager(new EfCommentRepository());
+
 		public IActionResult Index()
 		{
-			var values = blogManager.GetBlogListWithCategory();
+			var values = blogManager.GetBlogListWithCategoryAndComments();
 			return View(values);
 		}
 
 		public IActionResult BlogReadAll(int id)
 		{
+			var commentCountByBlog = commentManager.GetListByBlogId(id).Count();
+
+			ViewBag.commentCount = commentCountByBlog;
+
 			var values = blogManager.GetById(id);
 			return View(values);	
 		}
