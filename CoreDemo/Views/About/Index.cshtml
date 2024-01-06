@@ -47,7 +47,6 @@
 						@await Html.PartialAsync("~/Views/About/SocialMediaAbout.cshtml")
 
 						<div class="tech-btm">
-							<h4>Recent Posts</h4>
 
 							@await Component.InvokeAsync("BlogListByWriter", new { id = 1 })
 
