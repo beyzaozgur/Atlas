@@ -1,0 +1,15 @@
+﻿@using EntityLayer.Concrete
+@model Writer
+
+<li class="nav-item nav-profile">
+    <a href="#" class="nav-link">
+        <div class="nav-profile-image">
+            <img src="~/WriterImageFiles/@Model.WriterImage" alt="profile">
+            <span class="login-status online"></span>
+            <!--change to offline or busy as needed-->
+        </div>
+        <div class="nav-profile-text d-flex flex-column">
+            <span class="font-weight-bold mb-2">@Model.WriterName</span>
+        </div>
+    </a>
+</li>
