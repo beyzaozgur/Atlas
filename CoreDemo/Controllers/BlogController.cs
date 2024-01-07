@@ -3,6 +3,7 @@ using CoreDemo.ViewModels;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -13,6 +14,13 @@ namespace CoreDemo.Controllers
 
 		BlogManager blogManager = new BlogManager(new EfBlogRepository());
 		CommentManager commentManager = new CommentManager(new EfCommentRepository());
+
+		private readonly UserManager<User> _userManager;
+
+		public BlogController(UserManager<User> userManager)
+		{
+			_userManager = userManager;
+		}
 
 		public IActionResult Index()
 		{
@@ -33,7 +41,8 @@ namespace CoreDemo.Controllers
 		[AllowAnonymous]
         public IActionResult BlogListByWriter(int id)
         {
-			var values = blogManager.GetBlogListWithCategoryByWriter(1);
+			var userId = _userManager.GetUserId((System.Security.Claims.ClaimsPrincipal)User);
+			var values = blogManager.GetBlogListWithCategoryByWriter(Int32.Parse(userId));
 			return View(values);
         }
 
@@ -52,12 +61,13 @@ namespace CoreDemo.Controllers
         public IActionResult BlogAdd(AddUpdateBlogModel b)
         {
 			Blog blog = new Blog();
+			var userId = _userManager.GetUserId((System.Security.Claims.ClaimsPrincipal)User);
 
 			blog.BlogTitle = b.BlogTitle;
 			blog.BlogContent = b.BlogContent;
 			blog.BlogStatus = true;
 			blog.CreateDate = DateTime.Now;
-            blog.UserID = 1;
+            blog.UserID = Int32.Parse(userId);
 			blog.CategoryID = b.CategoryID;
 
             if (b.BlogImage != null)

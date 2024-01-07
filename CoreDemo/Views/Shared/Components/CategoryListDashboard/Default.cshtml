@@ -1,26 +1,29 @@
-﻿<div class="row">
+﻿@model List<EntityLayer.Concrete.Category>
+
+<div class="row">
 	<div class="col-md-12 grid-margin stretch-card">
 		<div class="card">
 			<div class="card-body">
-				<h4 class="card-title">Categories</h4>
+				<h4 class="card-title">My Categories</h4>
 				<div class="table-responsive">
 					<table class="table">
 						<thead>
 							<tr>
 								<th> Category </th>
-								<th> Status </th>
-								<th> Progress </th>
+								<th> My Blog Count </th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
-								<td> Software </td>
-								<td> Active </td>
-								<td>
-									<div class="progress">
-										<div class="progress-bar bg-gradient-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-									</div>
-								</td>
+								@foreach(var item in Model)
+								{
+									<td> @item.CategoryName </td>
+									<td>
+										<div class="progress">
+											<div class="progress-bar bg-gradient-success" role="progressbar" style="width: 25%" aria-valuenow="" aria-valuemin="0"></div>
+										</div>
+									</td>
+								}
 							</tr>
 						</tbody>
 					</table>

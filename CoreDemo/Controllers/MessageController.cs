@@ -22,8 +22,8 @@ namespace CoreDemo.Controllers
 		[AllowAnonymous]
 		public IActionResult Inbox()
 		{
-			int id = 1;
-			var values = messageManager.GetInboxListByWriter(id);
+			var userId = _userManager.GetUserId((System.Security.Claims.ClaimsPrincipal)User);
+			var values = messageManager.GetInboxListByWriter(Int32.Parse(userId));
 			return View(values);
 		}
 
@@ -56,8 +56,10 @@ namespace CoreDemo.Controllers
 		[HttpPost]
 		public IActionResult SendMessage(Message message)
 		{
+			var userId = _userManager.GetUserId((System.Security.Claims.ClaimsPrincipal)User);
+
 			message.MessageDate = DateTime.Today;
-			message.SenderID = 1;
+			message.SenderID = Int32.Parse(userId);
 			message.MessageStatus = true;
 
 			messageManager.TAdd(message);
