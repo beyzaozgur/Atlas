@@ -1,16 +1,25 @@
 ﻿using BusinessLayer.Concrete;
 using DataAccessLayer.EntityFramework;
+using EntityLayer.Concrete;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoreDemo.ViewComponents.Writer
 {
     public class WriterDropdownOnHeader: ViewComponent
     {
-        UserManager userManager = new UserManager(new EfUserRepository());
-        public IViewComponentResult Invoke()
+		private readonly UserManager<User> _userManager;
+
+		public WriterDropdownOnHeader(UserManager<User> userManager)
+		{
+			_userManager = userManager;
+		}
+
+		public IViewComponentResult Invoke()
         {
-            var writer = userManager.GetById(1);
-            return View(writer);
-        }
+			var userId = _userManager.GetUserId((System.Security.Claims.ClaimsPrincipal)User);
+			var user = _userManager.FindByIdAsync(userId).Result;
+			return View(user);
+		}
     }
 }

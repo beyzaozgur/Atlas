@@ -1,7 +1,9 @@
-﻿using DataAccessLayer.Concrete;
+﻿using CoreDemo.ViewModels;
+using DataAccessLayer.Concrete;
 using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
@@ -9,6 +11,13 @@ namespace CoreDemo.Controllers
 {
 	public class LoginController : Controller
 	{
+		private readonly SignInManager<User> _signInManager;
+
+		public LoginController(SignInManager<User> signInManager)
+		{
+			_signInManager = signInManager;
+		}
+
 		[AllowAnonymous]
 		public IActionResult Index()
 		{
@@ -17,27 +26,24 @@ namespace CoreDemo.Controllers
 
 		[HttpPost]
 		[AllowAnonymous]
-		public async Task<IActionResult> Index(User user)
+		public async Task<IActionResult> Index(LoginViewModel user)
 		{
-			Context c = new Context();
-			var dataValue = c.Users.FirstOrDefault(x => x.Email == user.Email && x.PasswordHash == user.PasswordHash);
-
-			if(dataValue != null)
+			if (ModelState.IsValid)
 			{
-				var claims = new List<Claim>
+				var result = await _signInManager.PasswordSignInAsync(user.Email, user.Password, false, true);
+
+				if (result.Succeeded)
 				{
-					new Claim(ClaimTypes.Name, user.Email)
-				};
+					return RedirectToAction("Index", "Blog");
+				}
+				else
+				{
+					return RedirectToAction("Index", "Login");
+				}
 
-				var userIdentity = new ClaimsIdentity(claims, "a");
-				ClaimsPrincipal principal = new ClaimsPrincipal(userIdentity);
-				await HttpContext.SignInAsync(principal);
-				return RedirectToAction("Index", "Dashboard");
 			}
-			else
-			{
-				return View();
-			}
+
+			return View();
 		}
 
 

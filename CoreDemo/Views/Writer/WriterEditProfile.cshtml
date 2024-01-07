@@ -1,4 +1,4 @@
-﻿@model CoreDemo.ViewModels.AddUpdateWriterModel
+﻿@model EntityLayer.Concrete.User
 
 @{
 	ViewData["Title"] = "WriterEditProfile";
@@ -11,21 +11,20 @@
 		<div class="card">
 			<div class="card-body">
 				<h4 class="card-title">Edit Profile</h4>
-				@Html.HiddenFor(x => x.WriterID)
-				@Html.HiddenFor(x => x.WriterPassword)
+				@Html.HiddenFor(x => x.Id)
 				<form class="forms-sample">
 					<div class="form-group">
 						<label for="inputName">Name Surname</label>
-						@Html.TextBoxFor(x => x.WriterName, new { @class = "form-control" })
+						@Html.TextBoxFor(x => x.NameSurname, new { @class = "form-control" })
 					</div>
 					<div class="form-group">
 						<label for="inputEmail">Email address</label>
-						@Html.TextBoxFor(x => x.WriterMail, new { @class = "form-control" })
+						@Html.TextBoxFor(x => x.Email, new { @class = "form-control" })
 					</div>
 					<div class="form-group">
 						<label for="inputCity">Şehir</label>
 						@* @Html.DropDownListFor(model => model.WriterCity, Model.CityList, new { @class = "form-control", id = "inputCityId", required = "required" }) *@
-						<select class="form-control" id="inputCityId" name="WriterCity" placeholder="@Model.WriterCity" required="">
+						<select class="form-control" id="inputCityId" name="City" placeholder="@Model.City" required="">
 							<option value="izmir">İzmir</option>
 							<option value="istanbul">İstanbul</option>
 							<option value="ankara">Ankara</option>
@@ -33,9 +32,9 @@
 					</div>
 					<div class="form-group">
 						<label>Profile Picture</label>
-						<input class="file-upload-default" type="file" name="WriterImage" id="formFile" accept="image/*">
+						<input class="file-upload-default" type="file" name="ImageUrl" id="formFile" accept="image/*">
 						<div class="input-group col-xs-12">
-							<input type="text" class="form-control file-upload-info" disabled placeholder="@Model.WriterImage" name="WriterImage">
+							<input type="text" class="form-control file-upload-info" disabled placeholder="@Model.ImageUrl" name="ImageUrl">
 							<span class="input-group-append">
 								<button class="file-upload-browse btn btn-gradient-primary" type="button">Upload</button>
 							</span>
@@ -43,7 +42,7 @@
 					</div>
 					<div class="form-group">
 						<label for="exampleTextarea1">About</label>
-						@Html.TextAreaFor(x => x.WriterAbout, 10, 3, new { @class = "form-control" })
+						@Html.TextAreaFor(x => x.About, 10, 3, new { @class = "form-control" })
 					</div>
 					<button type="submit" class="btn btn-gradient-primary mr-2">Update</button>
 					<button class="btn btn-light">Cancel</button>

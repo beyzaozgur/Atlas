@@ -2,6 +2,7 @@
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -10,7 +11,13 @@ namespace CoreDemo.Controllers
 	public class MessageController : Controller
 	{
 		MessageManager messageManager = new MessageManager(new EfMessageRepository());
-		UserManager userManager = new UserManager(new EfUserRepository());
+
+		private readonly UserManager<User> _userManager;
+
+		public MessageController(UserManager<User> userManager)
+		{
+			_userManager = userManager;
+		}
 
 		[AllowAnonymous]
 		public IActionResult Inbox()
@@ -39,9 +46,9 @@ namespace CoreDemo.Controllers
 		[HttpGet]
 		public IActionResult SendMessage(int id)
 		{
-			var user = userManager.GetById(id);
-			ViewBag.receiver = user.NameSurname;
-			ViewBag.receiverId = user.Id;
+			var user = _userManager.FindByIdAsync(id.ToString());
+			ViewBag.receiver = user.Result.NameSurname;
+			ViewBag.receiverId = user.Result.Id;
 			return View();
 		}
 

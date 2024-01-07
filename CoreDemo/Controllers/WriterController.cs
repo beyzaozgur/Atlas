@@ -5,13 +5,19 @@ using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoreDemo.Controllers
 {
     public class WriterController : Controller
 	{
-		UserManager userManager = new UserManager(new EfUserRepository());
+		private readonly UserManager<User> _userManager;
+
+		public WriterController(UserManager<User> userManager)
+		{
+			_userManager = userManager;
+		}
 
 		public IActionResult Index()
 		{
@@ -38,16 +44,17 @@ namespace CoreDemo.Controllers
 
 		[AllowAnonymous]
 		[HttpGet]
-		public IActionResult WriterEditProfile()
+		public async Task<IActionResult> WriterEditProfile()
 		{
-			var writerData = userManager.GetById(1);
+			var userId = _userManager.GetUserId((System.Security.Claims.ClaimsPrincipal)User);
+			var user = _userManager.FindByIdAsync(userId).Result;
 
-			return View(writerData);
+			return View(user);
 		}
 
 		[AllowAnonymous]
 		[HttpPost]
-		public IActionResult WriterEditProfile(AddUpdateWriterModel writer)
+		public async Task<IActionResult> WriterEditProfile(AddUpdateWriterModel writer)
 		{
 			User w = new User();
 
@@ -74,8 +81,17 @@ namespace CoreDemo.Controllers
 
 			if(results.IsValid)
 			{
-				userManager.TUpdate(w);
-				return RedirectToAction("Index", "Dashboard");
+				IdentityResult result = await _userManager.UpdateAsync(w);
+
+				if (result.Succeeded)
+				{
+					return RedirectToAction("Index", "Dashboard");
+				}
+				else
+				{
+					// update failed
+					return View();
+				}
 			}
 			else
 			{
