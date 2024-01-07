@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Abstract
 {
-	public interface IWriterDal: IGenericDal<Writer>
+	public interface IUserDal: IGenericDal<User>
 	{
 	}
 }

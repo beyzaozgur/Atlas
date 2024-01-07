@@ -11,7 +11,7 @@ namespace CoreDemo.Controllers
 {
     public class WriterController : Controller
 	{
-		WriterManager writerManager = new WriterManager(new EfWriterRepository());
+		UserManager userManager = new UserManager(new EfUserRepository());
 
 		public IActionResult Index()
 		{
@@ -40,7 +40,7 @@ namespace CoreDemo.Controllers
 		[HttpGet]
 		public IActionResult WriterEditProfile()
 		{
-			var writerData = writerManager.GetById(1);
+			var writerData = userManager.GetById(1);
 
 			return View(writerData);
 		}
@@ -49,15 +49,15 @@ namespace CoreDemo.Controllers
 		[HttpPost]
 		public IActionResult WriterEditProfile(AddUpdateWriterModel writer)
 		{
-			Writer w = new Writer();
+			User w = new User();
 
-			w.WriterID = writer.WriterID;
-			w.WriterPassword = writer.WriterPassword;
-			w.WriterName = writer.WriterName;
-			w.WriterMail = writer.WriterMail;
-			w.WriterCity = writer.WriterCity;
-			w.WriterAbout = writer.WriterAbout;
-			w.WriterStatus = true;
+			w.Id = writer.WriterID;
+			w.PasswordHash = writer.WriterPassword;
+			w.NameSurname = writer.WriterName;
+			w.Email = writer.WriterMail;
+			w.City = writer.WriterCity;
+			w.About = writer.WriterAbout;
+			w.Status = true;
 
 			if(writer.WriterImage != null)
 			{
@@ -66,15 +66,15 @@ namespace CoreDemo.Controllers
 				var location = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/WriterImageFiles/", newImageName);
 				var stream = new FileStream(location, FileMode.Create);
 				writer.WriterImage.CopyTo(stream);
-				w.WriterImage = newImageName;
+				w.ImageUrl = newImageName;
 			}
 
-			WriterValidator writerValidator = new WriterValidator();
-			ValidationResult results = writerValidator.Validate(w);
+			UserValidator userValidator = new UserValidator();
+			ValidationResult results = userValidator.Validate(w);
 
 			if(results.IsValid)
 			{
-				writerManager.TUpdate(w);
+				userManager.TUpdate(w);
 				return RedirectToAction("Index", "Dashboard");
 			}
 			else

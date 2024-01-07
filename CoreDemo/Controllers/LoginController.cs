@@ -17,16 +17,16 @@ namespace CoreDemo.Controllers
 
 		[HttpPost]
 		[AllowAnonymous]
-		public async Task<IActionResult> Index(Writer writer)
+		public async Task<IActionResult> Index(User user)
 		{
 			Context c = new Context();
-			var dataValue = c.Users.FirstOrDefault(x => x.Email == writer.WriterMail && x.PasswordHash == writer.WriterPassword);
+			var dataValue = c.Users.FirstOrDefault(x => x.Email == user.Email && x.PasswordHash == user.PasswordHash);
 
 			if(dataValue != null)
 			{
 				var claims = new List<Claim>
 				{
-					new Claim(ClaimTypes.Name, writer.WriterMail)
+					new Claim(ClaimTypes.Name, user.Email)
 				};
 
 				var userIdentity = new ClaimsIdentity(claims, "a");

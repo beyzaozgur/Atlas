@@ -13,7 +13,7 @@ namespace CoreDemo.Controllers
 {
 	public class RegisterController : Controller
 	{
-		WriterManager writerManager = new WriterManager(new EfWriterRepository());
+		UserManager UserManager = new UserManager(new EfUserRepository());
 
 		private readonly UserManager<User> _userManager;
 

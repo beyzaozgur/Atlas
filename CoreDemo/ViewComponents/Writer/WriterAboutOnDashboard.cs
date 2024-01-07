@@ -7,11 +7,11 @@ namespace CoreDemo.ViewComponents.Writer
 	public class WriterAboutOnDashboard: ViewComponent
 	{
 
-		WriterManager writerManager = new WriterManager(new EfWriterRepository());
+		UserManager userManager = new UserManager(new EfUserRepository());
 
 		public IViewComponentResult Invoke()
 		{
-			var writer = writerManager.GetById(1);
+			var writer = userManager.GetById(1);
 			return View(writer);
 		}
 	}

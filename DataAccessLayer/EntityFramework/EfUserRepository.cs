@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.EntityFramework
 {
-	public class EfWriterRepository : GenericRepository<Writer>, IWriterDal
+	public class EfUserRepository : GenericRepository<User>, IUserDal
 	{
 		
 	}

@@ -10,7 +10,7 @@ namespace CoreDemo.Controllers
 	public class MessageController : Controller
 	{
 		MessageManager messageManager = new MessageManager(new EfMessageRepository());
-		WriterManager writerManager = new WriterManager(new EfWriterRepository());
+		UserManager userManager = new UserManager(new EfUserRepository());
 
 		[AllowAnonymous]
 		public IActionResult Inbox()
@@ -39,9 +39,9 @@ namespace CoreDemo.Controllers
 		[HttpGet]
 		public IActionResult SendMessage(int id)
 		{
-			var writer = writerManager.GetById(id);
-			ViewBag.receiver = writer.WriterName;
-			ViewBag.receiverId = writer.WriterID;
+			var user = userManager.GetById(id);
+			ViewBag.receiver = user.NameSurname;
+			ViewBag.receiverId = user.Id;
 			return View();
 		}
 
