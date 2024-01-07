@@ -1,4 +1,4 @@
-﻿@model EntityLayer.Concrete.Writer
+﻿@model CoreDemo.ViewModels.RegisterViewModel
 
 @{
 	ViewData["Title"] = "Index";
@@ -15,15 +15,15 @@
 					<div class="form-row">
 						<div class="col-md-6 mb-3">
 							<label for="validationCustom01">Name Surname</label>
-							@Html.TextBoxFor(x => x.WriterName, new { @class = "form-control" })
-							@Html.ValidationMessageFor(x => x.WriterName, "", new { @class = "text-danger" })
+							@Html.TextBoxFor(x => x.NameSurname, new { @class = "form-control" })
+							@Html.ValidationMessageFor(x => x.NameSurname, "", new { @class = "text-danger" })
 							@*							<input type="text" class="form-control" id="validationDefault01" name="WriterName" placeholder="" required="">
 						*@
 						</div>
 						<div class="col-md-6 mb-3">
 							<label for="validationCustom02">Email</label>
-							@Html.TextBoxFor(x => x.WriterMail, new { @class = "form-control" })
-							@Html.ValidationMessageFor(x => x.WriterMail, "", new { @class = "text-danger" })
+							@Html.TextBoxFor(x => x.Email, new { @class = "form-control" })
+							@Html.ValidationMessageFor(x => x.Email, "", new { @class = "text-danger" })
 							@*							<input type="text" class="form-control" id="validationDefault02" name="WriterMail" placeholder="" required="">
 						*@
 						</div>
@@ -31,15 +31,15 @@
 					<div class="form-row">
 						<div class="form-group col-md-6">
 							<label for="exampleInputPassword1 mb-2">Password</label>
-							@Html.PasswordFor(x => x.WriterPassword, new { @class = "form-control" })
-							@Html.ValidationMessageFor(x => x.WriterPassword, "", new { @class = "text-danger" })
+							@Html.PasswordFor(x => x.Password, new { @class = "form-control" })
+							@Html.ValidationMessageFor(x => x.Password, "", new { @class = "text-danger" })
 							@*							<input type="password" class="form-control" id="password1" name="WriterPassword" placeholder="" required="">
 						*@
 						</div>
 						<div class="form-group col-md-6">
 							<label for="exampleInputPassword2 mb-2">Password Again</label>
-							@Html.PasswordFor(x => x.ConfirmPassword, new { @class = "form-control" })
-							@Html.ValidationMessageFor(x => x.ConfirmPassword, "", new { @class = "text-danger" })
+							@Html.PasswordFor(x => x.PasswordAgain, new { @class = "form-control" })
+							@Html.ValidationMessageFor(x => x.PasswordAgain, "", new { @class = "text-danger" })
 							@*							<input type="password" class="form-control" id="password2" name="ConfirmPassword" placeholder="" required="">
 						*@
 						</div>
@@ -47,7 +47,7 @@
 					<div class="form-row">
 						<div class="col-md-6 mb-3">
 							<label for="cityComboBox">City</label>
-							<select class="form-control" id="citySelect" name="WriterCity" placeholder="" required="">
+							<select class="form-control" id="citySelect" name="City" placeholder="" required="">
 								<option value="izmir">İzmir</option>
 								<option value="istanbul">İstanbul</option>
 								<option value="ankara">Ankara</option>
@@ -57,14 +57,14 @@
 							@* <label for="formFile" class="form-label">Profile Picture</label>
 						<input class="form-control" type="file" name="WriterImage" id="formFile" accept="image/*"> *@
 							<label>Profile Picture</label>
-							<input class="file-upload-default" type="file" placeholder="Upload Image" name="WriterImage" id="formFile" accept="image/*">
+							<input class="file-upload-default" type="file" placeholder="Upload Image" name="ImageUrl" id="formFile" accept="image/*">
 							<div class="input-group col-xs-12">
-								<input type="text" class="form-control file-upload-info" disabled name="WriterImage">
+								<input type="text" class="form-control file-upload-info" disabled name="ImageUrl">
 								<span class="input-group-append">
 									<button class="file-upload-browse btn btn-primary read-m" type="button">Upload</button>
 								</span>
 							</div>
-							@Html.ValidationMessageFor(x => x.WriterImage, "", new { @class = "text-danger" })
+							@Html.ValidationMessageFor(x => x.ImageUrl, "", new { @class = "text-danger" })
 						</div>
 					</div>
 					<div class="form-row">
@@ -74,6 +74,8 @@
 								<a href="#" id="terms">I have read all the terms and conditions and I accept them.</a>
 							</div>
 						</div>
+					</div>
+					<div class="text-danger" asp-validation-summary="ModelOnly">
 					</div>
 					<br />
 					<button type="submit" class="btn btn-primary read-m">Register</button>
