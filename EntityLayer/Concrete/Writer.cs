@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,8 +10,7 @@ namespace EntityLayer.Concrete
 {
 	public class Writer
 	{
-		[Key]
-        public int WriterID { get; set; }
+		public int WriterID { get; set; }
 
 		public string WriterName { get; set; }
 
@@ -24,8 +23,8 @@ namespace EntityLayer.Concrete
 		public string WriterPassword { get; set; }
 
 		[NotMapped] // Does not effect with your database
-		//[Required(ErrorMessage = "Confirm Password required")]
-		//[Compare("WriterPassword", ErrorMessage = "Password doesn't match.")]
+					//[Required(ErrorMessage = "Confirm Password required")]
+					//[Compare("WriterPassword", ErrorMessage = "Password doesn't match.")]
 		public string ConfirmPassword { get; set; }
 
 		public bool WriterStatus { get; set; }
@@ -36,9 +35,6 @@ namespace EntityLayer.Concrete
 
 		public ICollection<Message> SentMessages { get; set; }
 
-        public ICollection<Message> ReceivedMessages { get; set; }
-
-
-
-    }
+		public ICollection<Message> ReceivedMessages { get; set; }
+	}
 }

@@ -1,5 +1,5 @@
 ﻿using BusinessLayer.Concrete;
-using CoreDemo.Models;
+using CoreDemo.ViewModels;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Authorization;
@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace CoreDemo.Controllers
 {
-	public class BlogController : Controller
+    public class BlogController : Controller
 	{
 
 		BlogManager blogManager = new BlogManager(new EfBlogRepository());
@@ -57,7 +57,7 @@ namespace CoreDemo.Controllers
 			blog.BlogContent = b.BlogContent;
 			blog.BlogStatus = true;
 			blog.CreateDate = DateTime.Now;
-            blog.WriterID = 1;
+            blog.UserID = 1;
 			blog.CategoryID = b.CategoryID;
 
             if (b.BlogImage != null)
@@ -68,7 +68,6 @@ namespace CoreDemo.Controllers
                 var stream = new FileStream(location, FileMode.Create);
                 b.BlogImage.CopyTo(stream);
                 blog.BlogImage = newImageName;
-				blog.BlogThumbnailImage = newImageName;
             }
 
             blogManager.TAdd(blog);
@@ -107,7 +106,7 @@ namespace CoreDemo.Controllers
 			blog.BlogContent = b.BlogContent;
 			blog.BlogStatus = false;
 			blog.CreateDate = DateTime.Now;
-			blog.WriterID = 1;
+			blog.UserID = 1;
 			blog.CategoryID = b.CategoryID;
 
 			if (b.BlogImage != null)
@@ -118,7 +117,6 @@ namespace CoreDemo.Controllers
 				var stream = new FileStream(location, FileMode.Create);
 				b.BlogImage.CopyTo(stream);
 				blog.BlogImage = newImageName;
-				blog.BlogThumbnailImage = newImageName;
 			}
 
 			blogManager.TUpdate(blog);

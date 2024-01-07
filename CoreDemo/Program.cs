@@ -1,6 +1,9 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,6 +31,21 @@ builder.Services.ConfigureApplicationCookie(options =>
 	options.LoginPath = "/Login/Index/";
 	options.SlidingExpiration = true;
 });
+
+//builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+//		.AddJwtBearer(options =>
+//		{
+//			options.TokenValidationParameters = new TokenValidationParameters
+//			{
+//				ValidateIssuer = true,
+//				ValidateAudience = true,
+//				ValidateLifetime = true,
+//				ValidateIssuerSigningKey = true,
+//				ValidIssuer = "your-issuer",
+//				ValidAudience = "your-audience",
+//				IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("your-secret-key"))
+//			};
+//		});
 
 var app = builder.Build();
 

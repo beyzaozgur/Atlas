@@ -1,6 +1,5 @@
 ﻿using BusinessLayer.Concrete;
 using BusinessLayer.ValidationRules;
-using CoreDemo.Models;
 using CoreDemo.ViewModels;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
@@ -10,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CoreDemo.Controllers
 {
-	public class RegisterController : Controller
+    public class RegisterController : Controller
 	{
 		WriterManager writerManager = new WriterManager(new EfWriterRepository());
 

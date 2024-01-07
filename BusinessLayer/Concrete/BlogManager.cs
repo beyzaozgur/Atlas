@@ -42,7 +42,7 @@ namespace BusinessLayer.Concrete
 
 		public List<Blog> GetBlogListByWriter(int id)
 		{
-			return _blogDal.GetAll(x => x.WriterID == id);
+			return _blogDal.GetAll(x => x.UserID == id);
 		}
 
 		public List<Blog> GetLast5BlogsWithCategory()

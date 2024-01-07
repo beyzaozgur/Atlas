@@ -20,7 +20,7 @@ namespace CoreDemo.Controllers
 		public async Task<IActionResult> Index(Writer writer)
 		{
 			Context c = new Context();
-			var dataValue = c.Writers.FirstOrDefault(x => x.WriterMail == writer.WriterMail && x.WriterPassword == writer.WriterPassword);
+			var dataValue = c.Users.FirstOrDefault(x => x.Email == writer.WriterMail && x.PasswordHash == writer.WriterPassword);
 
 			if(dataValue != null)
 			{

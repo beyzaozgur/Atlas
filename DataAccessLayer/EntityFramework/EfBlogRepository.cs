@@ -33,7 +33,7 @@ namespace DataAccessLayer.EntityFramework
         {
             using (var c = new Context())
             {
-                return c.Blogs.Include(b => b.Category).Where(x => x.WriterID == id).ToList();
+                return c.Blogs.Include(b => b.Category).Where(x => x.UserID == id).ToList();
             }
         }
     }

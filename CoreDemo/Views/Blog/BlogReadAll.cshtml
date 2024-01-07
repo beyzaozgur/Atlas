@@ -71,7 +71,7 @@
 					<div class="right-blog-info text-left">
 
 						@await Component.InvokeAsync("CategoryList")
-						@await Component.InvokeAsync("BlogListByWriter", new { id = Model.WriterID })
+						@await Component.InvokeAsync("BlogListByWriter", new { id = Model.UserID })
 
 					</div>
 

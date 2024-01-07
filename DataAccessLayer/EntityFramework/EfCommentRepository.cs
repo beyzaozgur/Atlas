@@ -19,7 +19,7 @@ namespace DataAccessLayer.EntityFramework
 			{
 				var commentCount = c.Comments
 									.Join(c.Blogs, comment => comment.BlogID, blog => blog.BlogID, (comment, blog) => new { comment, blog })
-									.Where(result => result.blog.WriterID == id)
+									.Where(result => result.blog.UserID == id)
 									.Count();
 
 				return commentCount;
