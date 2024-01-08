@@ -11,13 +11,16 @@
 
 				<img src="~/CoreBlogTema/web/images/t1.jpg" alt="" class="img-fluid" />
 				<div class="media-body">
-					<h5 class="mt-0">@item.CommentUserName - @(((DateTime)item.CommentDate).ToString("dd.MM.yyyy"))</h5>
-					<p>
-						@item.CommentContent
-					</p>
+					<h5 class="mt-0">@item.CommentUserName - "@item.CommentTitle"</h5>
+					@item.CommentContent
+					<br />
+					<small>
+						@(((DateTime)item.CommentDate).ToString("dd.MM.yyyy"))
+					</small>
 				</div>
 
 			</div>
+			<br />
 		}
 	}
 	else
