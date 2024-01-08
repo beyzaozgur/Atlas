@@ -20,5 +20,13 @@ namespace CoreDemo.Controllers
 			var values = notificationManager.GetAll();
 			return View(values);
 		}
+
+		[AllowAnonymous]
+		public IActionResult DeleteNotification(int id)
+		{
+			var notification = notificationManager.GetById(id);
+			notificationManager.TDelete(notification);
+			return Json(new { result = true });
+		}
 	}
 }

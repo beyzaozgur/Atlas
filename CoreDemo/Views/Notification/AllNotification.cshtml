@@ -6,20 +6,74 @@
     Layout = "~/Views/Shared/WriterLayout.cshtml";
 }
 
-<h1>Notifications</h1>
+<div class="grid-margin stretch-card">
+	<div class="card">
+		<div class="card-body">
+			<h4 class="card-title">Notifications</h4>
+			<p class="card-description">
+			</p>
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>Notification</th>
+						<th>Date</th>
+						<th>Delete</th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (var item in Model)
+					{
+						<tr>
+							<td>@item.NotificationDetails</td>
+							<td>@item.NotificationDate.ToShortDateString()</td>
+							<td>
+								<button type="button" id="deleteBtn" onclick="deleteNotification(@item.NotificationID)" class="btn btn-gradient-danger btn-rounded btn-icon">
+									<i class="mdi mdi-delete"></i>
+								</button>
+							</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
 
-<table class="table">
-    <tr>
-        <th>#</th>
-        <th>Notification</th>
-        <th>Date</th>
-    </tr>
-    @foreach(var item in Model)
-    {
-        <tr>
-            <td>@item.NotificationID</td>
-            <td>@item.NotificationDetails</td>
-            <td>@item.NotificationDate.ToShortDateString()</td>
-        </tr>
-    }
-</table>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="~/CoreBlogTema/web/js/jquery-2.2.3.min.js"></script>
+
+<script>
+
+	function deleteNotification(id) {
+
+		Swal.fire({
+			title: 'Are you sure?',
+			text: "You won't be able to revert this!",
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Yes, delete this notification!'
+		}).then((result) => {
+			if (result.isConfirmed) {
+				$.ajax({
+					type: "POST",
+					url: "/Notification/DeleteNotification/" + id,
+					success: function (response) {
+						if (response.result) {
+							Swal.fire(
+								'Deleted!',
+								'Notification has been deleted.',
+								'success'
+							).then(function () {
+								location.reload();
+							}
+							);
+						}
+					}
+				});
+			}
+		})
+	}
+
+</script>
