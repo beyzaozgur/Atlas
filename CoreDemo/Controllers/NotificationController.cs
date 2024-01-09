@@ -1,13 +1,22 @@
 ﻿using BusinessLayer.Concrete;
 using DataAccessLayer.EntityFramework;
+using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq.Expressions;
 
 namespace CoreDemo.Controllers
 {
 	public class NotificationController : Controller
 	{
 		NotificationManager notificationManager = new NotificationManager(new EfNotificationRepository());
+
+		private readonly UserManager<User> _userManager;
+		public NotificationController(UserManager<User> userManager)
+		{
+			_userManager = userManager;
+		}
 
 		public IActionResult Index()
 		{
@@ -17,7 +26,9 @@ namespace CoreDemo.Controllers
 		[AllowAnonymous]
 		public IActionResult AllNotification()
 		{
-			var values = notificationManager.GetAll();
+			var userId = Int32.Parse(_userManager.GetUserId((System.Security.Claims.ClaimsPrincipal)User));
+			Expression<Func<Notification, bool>> expression = x => x.NotifiedUserID == userId;
+			var values = notificationManager.GetAll(expression).OrderByDescending(x => x.NotificationDate).ToList();
 			return View(values);
 		}
 

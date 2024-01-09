@@ -48,7 +48,7 @@ namespace CoreDemo.Controllers
 
 			Notification notification = new Notification();
 			notification.NotificationType = "Comment";
-			notification.NotificationTypeSymbol = "fa-comment";
+			notification.NotificationTypeSymbol = "mdi mdi-comment-text";
 			notification.NotificationTypeColor = "#0096FF";
 			notification.NotificationDetails = $"{comment.CommentUserName} has commented to your blog \"{commentedBlogName}\"";
 			notification.NotificationDate = DateTime.Now;

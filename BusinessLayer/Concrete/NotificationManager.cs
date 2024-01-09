@@ -4,6 +4,7 @@ using EntityLayer.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -16,6 +17,11 @@ namespace BusinessLayer.Concrete
 		public NotificationManager(INotificationDal notificationDal)
 		{
 			_notificationDal = notificationDal;
+		}
+
+		public List<Notification> GetAll(Expression<Func<Notification, bool>> value)
+		{
+			return _notificationDal.GetAll(value);
 		}
 
 		public List<Notification> GetAll()
