@@ -28,6 +28,7 @@ namespace EntityLayer.Concrete
 
 		public Blog Blog { get; set; }
 
+        public Notification Notification { get; set; }
 
-	}
+    }
 }

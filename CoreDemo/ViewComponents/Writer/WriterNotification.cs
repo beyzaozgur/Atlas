@@ -19,8 +19,7 @@ namespace CoreDemo.ViewComponents.Writer
 		public IViewComponentResult Invoke()
         {
 			var userId = Int32.Parse(_userManager.GetUserId((System.Security.Claims.ClaimsPrincipal)User));
-			Expression<Func<Notification, bool>> expression = x => x.NotifiedUserID == userId;
-			var values = notificationManager.GetAll(expression).OrderByDescending(x => x.NotificationDate).Take(3).ToList();
+			var values = notificationManager.GetNotificationListWithComment(userId).Take(3).ToList();
 			return View(values);
         }
     }

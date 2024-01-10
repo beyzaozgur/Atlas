@@ -54,6 +54,7 @@ namespace CoreDemo.Controllers
 			notification.NotificationDate = DateTime.Now;
 			notification.NotificationStatus = true;
 			notification.NotifiedUserID = blogOwnerID;
+			notification.CommentID = comment.CommentID;
 
 			notificationManager.TAdd(notification);
 

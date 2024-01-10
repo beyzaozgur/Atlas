@@ -24,7 +24,7 @@
 					@foreach (var item in Model)
 					{
 						<tr>
-							<td>@item.NotificationDetails</td>
+							<td><a href="/Blog/BlogReadAll/@item.Comment.BlogID">@item.NotificationDetails</a></td>
 							<td>@item.NotificationDate.ToShortDateString()</td>
 							<td>
 								<button type="button" id="deleteBtn" onclick="deleteNotification(@item.NotificationID)" class="btn btn-gradient-danger btn-rounded btn-icon">

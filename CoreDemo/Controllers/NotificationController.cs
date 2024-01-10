@@ -27,8 +27,7 @@ namespace CoreDemo.Controllers
 		public IActionResult AllNotification()
 		{
 			var userId = Int32.Parse(_userManager.GetUserId((System.Security.Claims.ClaimsPrincipal)User));
-			Expression<Func<Notification, bool>> expression = x => x.NotifiedUserID == userId;
-			var values = notificationManager.GetAll(expression).OrderByDescending(x => x.NotificationDate).ToList();
+			var values = notificationManager.GetNotificationListWithComment(userId);
 			return View(values);
 		}
 

@@ -26,5 +26,9 @@ namespace EntityLayer.Concrete
 
 		public int NotifiedUserID { get; set; }
 
-	}
+        public int? CommentID { get; set; }
+
+        public Comment Comment { get; set; }
+
+    }
 }

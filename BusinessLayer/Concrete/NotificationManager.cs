@@ -34,7 +34,12 @@ namespace BusinessLayer.Concrete
 			return _notificationDal.GetByID(Id);
 		}
 
-		public void TAdd(Notification t)
+        public List<Notification> GetNotificationListWithComment(int userId)
+        {
+			return _notificationDal.GetNotificationListWithComment(userId);
+        }
+
+        public void TAdd(Notification t)
 		{
 			_notificationDal.Insert(t);
 		}

@@ -6,7 +6,7 @@
     <h6 class="p-3 mb-0">Notifications</h6>
     <div class="dropdown-divider"></div>
     @foreach(var item in Model) {
-        <a class="dropdown-item preview-item" href="/Notification/AllNotification/">
+        <a class="dropdown-item preview-item" href="/Blog/BlogReadAll/@item.Comment.BlogID">
         <div class="preview-thumbnail">
             <div style="color:@item.NotificationTypeColor">
                 <i class="@item.NotificationTypeSymbol"></i>

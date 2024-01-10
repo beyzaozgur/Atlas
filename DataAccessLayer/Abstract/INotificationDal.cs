@@ -9,5 +9,6 @@ namespace DataAccessLayer.Abstract
 {
 	public interface INotificationDal : IGenericDal<Notification>
 	{
+		List<Notification> GetNotificationListWithComment(int userId);
 	}
 }
