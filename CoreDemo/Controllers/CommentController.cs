@@ -31,12 +31,13 @@ namespace CoreDemo.Controllers
 		}
 
         [HttpPost]
-        public IActionResult AddComment(Comment comment)
+        public async Task<IActionResult> AddComment(Comment comment)
         {
 			var commenterId = _userManager.GetUserId((System.Security.Claims.ClaimsPrincipal)User);
 			var commenterName = _userManager.FindByIdAsync(commenterId).Result.NameSurname;
 
 			comment.CommentUserName = commenterName;
+			comment.CommenterID = Int32.Parse(commenterId);
 			comment.CommentDate = DateTime.Now;
 			comment.CommentStatus = true;
 

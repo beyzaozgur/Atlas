@@ -12,6 +12,10 @@ namespace EntityLayer.Concrete
 		[Key]
 		public int CommentID { get; set; }
 
+		public int CommenterID { get; set; }
+
+		public User User { get; set; }
+
 		public string CommentUserName { get; set; }
 
 		public string CommentTitle { get; set; }
@@ -29,6 +33,8 @@ namespace EntityLayer.Concrete
 		public Blog Blog { get; set; }
 
         public Notification Notification { get; set; }
+
+
 
     }
 }

@@ -13,5 +13,6 @@ namespace BusinessLayer.Abstract
 
 		int GetCommentCountByWriterId(int id);
 
+		List<Comment> GetCommentsWithUser(int id);
 	}
 }

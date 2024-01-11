@@ -27,5 +27,6 @@ namespace EntityLayer.Concrete
 
 		public ICollection<Message> ReceivedMessages { get; set; }
 
+		public List<Comment> Comments { get; set; }
 	}
 }
