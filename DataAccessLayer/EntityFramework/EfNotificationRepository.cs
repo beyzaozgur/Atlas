@@ -17,7 +17,7 @@ namespace DataAccessLayer.EntityFramework
         {
             using (var c = new Context())
             {
-                var values = c.Notifications.Include(b => b.Comment).Where(x => x.NotifiedUserID == userId).OrderByDescending(x => x.NotificationDate).ToList();
+                var values = c.Notifications.Include(b => b.Comment).Where(x => x.NotifiedUserID == userId).Where(x => x.Comment.CommenterID != userId).OrderByDescending(x => x.NotificationDate).ToList();
                 return values;
             }
         }
