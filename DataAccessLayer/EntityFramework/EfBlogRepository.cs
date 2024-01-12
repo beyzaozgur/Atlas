@@ -13,11 +13,11 @@ namespace DataAccessLayer.EntityFramework
 {
 	public class EfBlogRepository : GenericRepository<Blog>, IBlogDal
 	{
-		public List<Blog> GetListWithCategoryAndComments()
+		public List<Blog> GetListWithCategoryAndCommentsAndUser()
 		{
 			using (var c = new Context())
 			{
-				return c.Blogs.Include(b => b.Category).Include(b => b.Comments).ToList();	
+				return c.Blogs.Include(b => b.Category).Include(b => b.Comments).Include(c => c.User).ToList();	
 			}
 		}
 
@@ -36,5 +36,13 @@ namespace DataAccessLayer.EntityFramework
                 return c.Blogs.Include(b => b.Category).Where(x => x.UserID == id).ToList();
             }
         }
-    }
+
+		public Blog GetBlogWithUserByBlogId(int blogId)
+		{
+			using (var c = new Context())
+			{
+				return c.Blogs.Include(b => b.User).Where(x => x.BlogID == blogId).ToList().FirstOrDefault();
+			}
+		}
+	}
 }

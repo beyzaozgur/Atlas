@@ -5,16 +5,6 @@
 	Layout = "~/Views/Shared/UserLayout.cshtml";
 }
 
-<!--
-	Author: W3layouts
-	Author URL: http://w3layouts.com
-	License: Creative Commons Attribution 3.0 Unported
-	License URL: http://creativecommons.org/licenses/by/3.0/
--->
-
-<!DOCTYPE html>
-<html lang="zxx">
-
 <body>
 
 	<!--//banner-->
@@ -52,13 +42,24 @@
 								</ul>
 							</div>
 						</div>
-
 						<h3>
-							<a>@Model.BlogTitle</a>
+							@Model.BlogTitle
 						</h3>
 						<p>
 							@Model.BlogContent
 						</p>
+						<h3>
+							About Writer
+						</h3>
+						<div class="media">
+							<img width="80" height="80" style="border-radius: 50%;" src="~/WriterImageFiles/@Model.User.ImageUrl" alt="" class="img-fluid" />
+							<div class="media-body">
+								<h5 class="mt-0">@Model.User.NameSurname</h5>
+								@Model.User.About
+							</div>
+						</div>
+						<br />
+						<br />
 						<a href="/Blog/Index/" class="btn btn-primary read-m">Return to Popular Blogs</a>
 					</div>
 					@await Component.InvokeAsync("CommentListByBlog", new { id = Model.BlogID })

@@ -24,7 +24,7 @@ namespace CoreDemo.Controllers
 
 		public IActionResult Index()
 		{
-			var values = blogManager.GetBlogListWithCategoryAndComments();
+			var values = blogManager.GetBlogListWithCategoryAndCommentsAndUser();
 			return View(values);
 		}
 
@@ -34,7 +34,7 @@ namespace CoreDemo.Controllers
 
 			ViewBag.commentCount = commentCountByBlog;
 
-			var values = blogManager.GetById(id);
+			var values = blogManager.GetBlogWithUserByBlogId(id);
 			return View(values);	
 		}
 

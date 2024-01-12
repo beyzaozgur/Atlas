@@ -41,6 +41,13 @@
 									<a onclick="readAll(@item.BlogID)">@item.BlogTitle</a>
 								</h5>
 								<p class="card-text mb-3">@item.BlogContent.Substring(0, item.BlogContent.Substring(0, 100).LastIndexOf(" "))...</p>
+								<div class="media">
+									<img width="25" height="25" style="border-radius: 50%;" src="~/WriterImageFiles/@item.User.ImageUrl" alt="" class="img-fluid" />
+									<p class="media-body">
+										@item.User.NameSurname
+									</p>
+								</div>
+								<br />
 								<a class="btn btn-primary read-m" onclick="readAll(@item.BlogID)">Read More</a>
 							</div>
 						</div>

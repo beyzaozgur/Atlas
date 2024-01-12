@@ -20,9 +20,9 @@ namespace BusinessLayer.Concrete
 			_blogDal = blogDal;
         }
 
-		public List<Blog> GetBlogListWithCategoryAndComments()
+		public List<Blog> GetBlogListWithCategoryAndCommentsAndUser()
 		{
-			return _blogDal.GetListWithCategoryAndComments();
+			return _blogDal.GetListWithCategoryAndCommentsAndUser();
 		}
 
 		public List<Blog> GetBlogListWithCategory()
@@ -73,6 +73,11 @@ namespace BusinessLayer.Concrete
 		public Blog GetById(int Id)
 		{
 			return _blogDal.GetByID(Id);
+		}
+
+		public Blog GetBlogWithUserByBlogId(int blogId)
+		{
+			return _blogDal.GetBlogWithUserByBlogId(blogId);
 		}
 	}
 }
