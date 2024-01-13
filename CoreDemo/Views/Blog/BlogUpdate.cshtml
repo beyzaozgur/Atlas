@@ -31,6 +31,9 @@
 					</div>
 				</div>
 				<div class="form-group">
+					<img width="150" height="150" id="imagePreview" src="~/BlogImages/@Model.BlogImage"/>
+				</div>
+				<div class="form-group">
 					<label for="categoryDropdown">Category</label>
 					<select style="color: black;" class="form-control" id="categoryDropdown" name="CategoryID">
 						@foreach (var item in ViewBag.categories)
@@ -71,4 +74,22 @@
 			});
 		});
 	})(jQuery);
+
+	function handleFileSelect(event) {
+		const selectedFile = event.target.files[0];
+
+		if (selectedFile) {
+			const reader = new FileReader();
+
+			reader.onload = function (e) {
+				$('#imagePreview').attr('src', e.target.result);
+			};
+
+			reader.readAsDataURL(selectedFile);
+		}
+	}
+
+	$(document).ready(function () {
+		$('#formFile').on('change', handleFileSelect);
+	});
 </script>

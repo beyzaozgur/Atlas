@@ -45,12 +45,11 @@
 						<img width="65%" src="~/Images/atlas.png" alt="logo">
 					</a>
 				</div>
+
 				@if (!User.Identity.IsAuthenticated)
 				{
 					@await Html.PartialAsync("Header")
 				}
-
-				
 
 			</div>
 		</div>
