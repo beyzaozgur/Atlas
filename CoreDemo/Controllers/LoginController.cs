@@ -46,6 +46,13 @@ namespace CoreDemo.Controllers
 			return View();
 		}
 
+		[AllowAnonymous]
+		public async Task<IActionResult> WriterLogOut()
+		{
+			await _signInManager.SignOutAsync();
+			return RedirectToAction("Index", "Login");
+		}
+
 
 	}
 }
