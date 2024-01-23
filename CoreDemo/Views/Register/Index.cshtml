@@ -4,6 +4,7 @@
 	ViewData["Title"] = "Index";
 	Layout = "~/Views/Shared/UserLayout.cshtml";
 }
+<link href="~/css/site.css" rel="stylesheet" />
 
 <section class="main-content-w3layouts-agileits">
 	<div class="container">
@@ -74,7 +75,7 @@
 						<div class="col-md-6 mb-3">
 							<div class="form-check mb-2">
 								<input type="checkbox" class="form-check-input" id="approveCheck">
-								<a href="#" id="terms">I have read all the terms and conditions and I accept them.</a>
+								<a id="terms">I have read all the terms and conditions and I accept them.</a>
 							</div>
 						</div>
 					</div>
@@ -89,6 +90,7 @@
 	<br />
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script src="~/coreblogtema/web/js/jquery-2.2.3.min.js"></script>
+	<script src="~/js/terms.js"></script>
 
 	<script>
 		(function ($) {
@@ -118,8 +120,18 @@
 			}
 		}
 
+		var termsAndConditions = getTermsAndConditions();
+
+		function showTermsAndConditions() {
+			Swal.fire({
+				title: "Terms and Conditions",
+				html: termsAndConditions
+			});
+		}
+
 		$(document).ready(function () {
 			$('#formFile').on('change', handleFileSelect);
+			$('#terms').on('click', showTermsAndConditions);
 		});
 	</script>
 </section>

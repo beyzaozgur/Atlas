@@ -16,3 +16,13 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+#terms {
+    text-decoration: underline;
+}
+
+#terms:hover {
+    cursor: pointer;
+    color: #9a55ff;
+    text-decoration: underline;
+}
