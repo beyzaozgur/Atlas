@@ -82,7 +82,7 @@
 					<div class="text-danger" asp-validation-summary="ModelOnly">
 					</div>
 					<br />
-					<button type="submit" class="btn btn-primary read-m">Register</button>
+					<button type="submit" id="submitBtn" class="btn btn-primary read-m">Register</button>
 				}
 			</div>
 		</div>
@@ -132,6 +132,20 @@
 		$(document).ready(function () {
 			$('#formFile').on('change', handleFileSelect);
 			$('#terms').on('click', showTermsAndConditions);
+
+			document.getElementById("submitBtn").addEventListener("click", function (event) {
+
+				var checkbox = document.getElementById("approveCheck");
+
+				if (!checkbox.checked) {
+					event.preventDefault();
+					Swal.fire({
+						title: "Error",
+						text: "You need to read and agree the terms and conditions.",
+						icon: "error"
+					});
+				}
+			});
 		});
 	</script>
 </section>
