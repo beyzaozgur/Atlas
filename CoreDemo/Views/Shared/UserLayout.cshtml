@@ -50,7 +50,12 @@
 				{
 					@await Html.PartialAsync("Header")
 				}
-
+				else
+				{
+					<div class="col-md-8" style="align-content:end; display: flex; justify-content: flex-end;">
+						@await Component.InvokeAsync("WriterDropdownOnHeader")
+					</div>
+				}
 			</div>
 		</div>
 

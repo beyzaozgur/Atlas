@@ -1,7 +1,7 @@
 ﻿@using EntityLayer.Concrete
 @model User
 
-<li class="nav-item nav-profile dropdown">
+@* <li class="nav-item nav-profile dropdown">
     <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
         <div class="nav-profile-img">
             <img src="~/WriterImageFiles/@Model.ImageUrl" alt="image">
@@ -20,4 +20,15 @@
             <i class="mdi mdi-logout mr-2 text-primary"></i> Signout
         </a>
     </div>
-</li>
+</li> *@
+
+<div style="display: flex; justify-content: center; align-items:center; background-color: #ffffff;">
+	<img class="user-img" src="~/WriterImageFiles/@Model.ImageUrl" alt="image">
+</div>
+<div class="dropdown-1">
+	<button class="dropbtn-1 dropdown-text-1">@Model.NameSurname</button>
+	<div class="dropdown-content-1">
+		<a class="dropdown-text-1" href="#">Activity Log</a>
+		<a class="dropdown-text-1" href="/Login/WriterLogOut/">Sign Out</a>
+	</div>
+</div>
