@@ -49,58 +49,50 @@ namespace CoreDemo.Controllers
 			var userId = _userManager.GetUserId((System.Security.Claims.ClaimsPrincipal)User);
 			var user = _userManager.FindByIdAsync(userId).Result;
 
-			return View(user);
+			AddUpdateWriterModel model = new AddUpdateWriterModel();
+			model.WriterID = user.Id;
+			model.WriterName = user.NameSurname;
+			model.WriterMail = user.Email;
+			model.WriterCity = user.City;
+			model.WriterImageUrl = user.ImageUrl;
+			model.WriterAbout = user.About;
+
+			return View(model);
 		}
 
 		[AllowAnonymous]
 		[HttpPost]
 		public async Task<IActionResult> WriterEditProfile(AddUpdateWriterModel writer)
 		{
-			User w = new User();
+			var userToUpdate = await _userManager.FindByIdAsync((writer.WriterID).ToString());
+			userToUpdate.NameSurname = writer.WriterName;
+			userToUpdate.Email = writer.WriterMail;
+			userToUpdate.City = writer.WriterCity;
+			userToUpdate.About = writer.WriterAbout;
 
-			w.Id = writer.WriterID;
-			w.PasswordHash = writer.WriterPassword;
-			w.NameSurname = writer.WriterName;
-			w.Email = writer.WriterMail;
-			w.City = writer.WriterCity;
-			w.About = writer.WriterAbout;
-			w.Status = true;
-
-			if(writer.WriterImage != null)
+			if (writer.WriterImage != null)
 			{
 				var extension = Path.GetExtension(writer.WriterImage.FileName);
 				var newImageName = Guid.NewGuid() + extension;
 				var location = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/WriterImageFiles/", newImageName);
 				var stream = new FileStream(location, FileMode.Create);
 				writer.WriterImage.CopyTo(stream);
-				w.ImageUrl = newImageName;
+				userToUpdate.ImageUrl = newImageName;
 			}
 
 			UserValidator userValidator = new UserValidator();
-			ValidationResult results = userValidator.Validate(w);
 
-			if(results.IsValid)
+			IdentityResult result = await _userManager.UpdateAsync(userToUpdate);
+
+			if (result.Succeeded)
 			{
-				IdentityResult result = await _userManager.UpdateAsync(w);
-
-				if (result.Succeeded)
-				{
-					return RedirectToAction("Index", "Dashboard");
-				}
-				else
-				{
-					// update failed
-					return View();
-				}
+				return RedirectToAction("Index", "Dashboard");
 			}
 			else
 			{
-				foreach(var item in results.Errors)
-				{
-					ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
-				}
+				return View();
 			}
-			return View();
+
 		}
 	}
 }

@@ -10,7 +10,9 @@
 
         public IFormFile WriterImage { get; set; }
 
-        public string WriterMail { get; set; }
+		public string WriterImageUrl { get; set; }
+
+		public string WriterMail { get; set; }
 
         public bool WriterStatus { get; set; }
 
