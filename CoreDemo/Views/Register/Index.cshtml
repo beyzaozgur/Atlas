@@ -48,10 +48,9 @@
 					<div class="form-row">
 						<div class="col-md-6 mb-3">
 							<label for="cityComboBox">City</label>
+							<label for="inputCity">Şehir</label>
 							<select class="form-control" id="citySelect" name="City" placeholder="" required="">
-								<option value="izmir">İzmir</option>
-								<option value="istanbul">İstanbul</option>
-								<option value="ankara">Ankara</option>
+								<option value=""></option>
 							</select>
 						</div>
 						<div class="form-group col-md-5 mb-3">
@@ -91,6 +90,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script src="~/coreblogtema/web/js/jquery-2.2.3.min.js"></script>
 	<script src="~/js/terms.js"></script>
+	<script src="~/js/cities.js"></script>
 
 	<script>
 		(function ($) {
@@ -146,6 +146,15 @@
 					});
 				}
 			});
+
+			var cityList = getCities();
+
+			for (var i = 0; i < cityList.length; i++) {
+
+				var option = $('<option value="' + cityList[i] + '">' + cityList[i] + '</option>');
+
+				$("#citySelect").append(option);
+			}
 		});
 	</script>
 </section>
